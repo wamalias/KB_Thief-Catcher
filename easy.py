@@ -9,9 +9,9 @@ class Player(object):
     
     def __init__(self):
         self.image_surf = pygame.image.load("img/detective.png").convert_alpha()
-        self.resized = pygame.transform.scale(self.image_surf, (45, 45))
+        self.resized = pygame.transform.scale(self.image_surf, (55, 55))
         self.x = 10
-        self.y = 650
+        self.y = 643
  
     def move(self, dx, dy):
         
@@ -33,9 +33,9 @@ class Enemy(object):
     
     def __init__(self):
         self.end_rect = pygame.image.load("img/thief.png").convert_alpha()
-        self.resized = pygame.transform.scale(self.end_rect, (70, 70))
-        self.x = 900
-        self.y = 55
+        self.resized = pygame.transform.scale(self.end_rect, (55, 55))
+        self.x = 950
+        self.y = 90
 
 class Wall(object) :
     

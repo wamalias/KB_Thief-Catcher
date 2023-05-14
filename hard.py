@@ -9,9 +9,9 @@ class Player(object):
     
     def __init__(self):
         self.image_surf = pygame.image.load("img/detective.png").convert_alpha()
-        self.resized = pygame.transform.scale(self.image_surf, (45, 45))
+        self.resized = pygame.transform.scale(self.image_surf, (55, 55))
         self.x = 10
-        self.y = 650
+        self.y = 643
  
     def move(self, dx, dy):
         
@@ -33,15 +33,15 @@ class Enemy(object):
     
     def __init__(self):
         self.end_rect = pygame.image.load("img/thief.png").convert_alpha()
-        self.resized = pygame.transform.scale(self.end_rect, (70, 70))
-        self.x = 900
-        self.y = 55
+        self.resized = pygame.transform.scale(self.end_rect, (55, 55))
+        self.x = 950
+        self.y = 90
 
 
 class Wall(object) :
     
     def __init__(self, x, y):
-        self.bg = pygame.image.load("img/background.png").convert()
+        self.bg = pygame.image.load("img/pohon.png").convert()
         self.resized = pygame.transform.scale(self.bg, (50, 50))
         self.x = x
         self.y = y
@@ -82,19 +82,19 @@ enemy = Enemy()
  
 # Holds the level layout in a list of strings.
 level = [
-"WWWWWWWWWWWWWWWWWWWW",
+"WWWWWWWWWWWPWWWWWWWW",
 "WPPPPPPPPPPBPPPPPPPP",
 "WP3DDDQDQDDFDDDQDQDD",
-"WPNWWWNPNWWNPPPNWNPP",
-"WPNW3DFDRWW2QDD4WNPW",
-"WPNWNPNWTD1WNWWWWNPW",
-"WYFDFDRWNPNWNW3DDRPW",
-"WPNWNPTDRPTDFDRWWNPW",
-"WPNWNPNWNPNWNPNWWNPW",
-"WPNWTDSDFDSDRPTDDRPW",
-"WPNWNPPPNWWWNPNPPNPW",
-"WPNWTDDQSQDDSQSDDRPW",
-"WPNWNWWNPNPPPNWWWNP",
+"WPNPPPNPNPPNPPPNPNPP",
+"WPNP3DFDRPP2QDD4PNPW",
+"WPNPNPNPTD1PNPPPPNPW",
+"PYFDFDRPNPNPNP3DDRPW",
+"WPNPNPTDRPTDFDRPPNPW",
+"WPNPNPNPNPNPNPNPPNPW",
+"WPNPTDSDFDSDRPTDDRPW",
+"WPNPNPPPNPPPNPNPPNPW",
+"WPNPTDDQSQDDSQSDDRPW",
+"PPNPNPPNPNPPPNPPPNPW",
 "DDSDSDDSDSDDDSDDD4PW",
 "PPPPPPPPPPPPPPPPPPP",
 "WWWWWWWWWWWWWWWWWWWW",
@@ -105,11 +105,11 @@ x = y = 0
 for row in level:
     for col in row:
         if col == "W":
-            Wall(x, y)
+            Road("img/background.png", x, y)
         if col == "E":
             enemy = Enemy(x, y)
         if col == "P":
-            Road("img/pohon.png", x, y)
+            Wall(x, y)
         if col == "F":
             Hint("img/perempatan.png", x, y)
         if col == "D":
