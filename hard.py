@@ -8,7 +8,7 @@ import pygame
 class Player(object):
     
     def __init__(self):
-        self.image_surf = pygame.image.load("detective.png").convert_alpha()
+        self.image_surf = pygame.image.load("img/detective.png").convert_alpha()
         self.resized = pygame.transform.scale(self.image_surf, (45, 45))
         self.x = 10
         self.y = 650
@@ -32,7 +32,7 @@ class Player(object):
 class Enemy(object):
     
     def __init__(self):
-        self.end_rect = pygame.image.load("thief.png").convert_alpha()
+        self.end_rect = pygame.image.load("img/thief.png").convert_alpha()
         self.resized = pygame.transform.scale(self.end_rect, (70, 70))
         self.x = 900
         self.y = 55
@@ -41,7 +41,7 @@ class Enemy(object):
 class Wall(object) :
     
     def __init__(self, x, y):
-        self.bg = pygame.image.load("background.png").convert()
+        self.bg = pygame.image.load("img/background.png").convert()
         self.resized = pygame.transform.scale(self.bg, (50, 50))
         self.x = x
         self.y = y
@@ -109,37 +109,37 @@ for row in level:
         if col == "E":
             enemy = Enemy(x, y)
         if col == "P":
-            Road("pohon.png", x, y)
+            Road("img/pohon.png", x, y)
         if col == "F":
-            Hint("perempatan.png", x, y)
+            Hint("img/perempatan.png", x, y)
         if col == "D":
-            Road("datar.png", x, y)
+            Road("img/datar.png", x, y)
         if col == "N":
-            Road("naik.png", x, y)
+            Road("img/naik.png", x, y)
         if col == "B":
-            Road("buntu-b.png", x, y)
+            Road("img/buntu-b.png", x, y)
         if col == "X":
-            Road("buntu-x.png", x, y)
+            Road("img/buntu-x.png", x, y)
         if col == "Y":
-            Road("buntu-y.png", x, y)
+            Road("img/buntu-y.png", x, y)
         if col == "Z":
-            Road("buntu-z.png", x, y)
+            Road("img/buntu-z.png", x, y)
         if col == "1":
-            Road("turn-1.png", x, y)
+            Road("img/turn-1.png", x, y)
         if col == "2":
-            Road("turn-2.png", x, y)
+            Road("img/turn-2.png", x, y)
         if col == "3":
-            Road("turn-3.png", x, y)
+            Road("img/turn-3.png", x, y)
         if col == "4":
-            Road("turn-4.png", x, y)
+            Road("img/turn-4.png", x, y)
         if col == "Q":
-            Hint("pertigaan-u.png", x, y)
+            Hint("img/pertigaan-u.png", x, y)
         if col == "R":
-            Hint("pertigaan-r.png", x, y)
+            Hint("img/pertigaan-r.png", x, y)
         if col == "S":
-            Hint("pertigaan-d.png", x, y)
+            Hint("img/pertigaan-d.png", x, y)
         if col == "T":
-            Hint("pertigaan-l.png", x, y)
+            Hint("img/pertigaan-l.png", x, y)
         x += 50
     y += 50
     x = 0
