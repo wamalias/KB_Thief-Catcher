@@ -8,7 +8,7 @@ import pygame
 class Player(object):
     
     def __init__(self):
-        self.image_surf = pygame.image.load("./img/detective.png").convert_alpha()
+        self.image_surf = pygame.image.load("detective.png").convert_alpha()
         self.resized = pygame.transform.scale(self.image_surf, (45, 45))
         self.x = 10
         self.y = 650
@@ -32,7 +32,7 @@ class Player(object):
 class Enemy(object):
     
     def __init__(self):
-        self.end_rect = pygame.image.load("./img/thief.png").convert_alpha()
+        self.end_rect = pygame.image.load("thief.png").convert_alpha()
         self.resized = pygame.transform.scale(self.end_rect, (70, 70))
         self.x = 900
         self.y = 55
@@ -40,7 +40,7 @@ class Enemy(object):
 class Wall(object) :
     
     def __init__(self, x, y):
-        self.bg = pygame.image.load("./img/background.png").convert()
+        self.bg = pygame.image.load("background.png").convert()
         self.resized = pygame.transform.scale(self.bg, (50, 50))
         self.x = x
         self.y = y
@@ -62,32 +62,8 @@ class Hint(object) :
         self.resized = pygame.transform.scale(self.hint, (50, 50))
         self.x = x
         self.y = y
-        self.question = 1
         Hints.append(self)
-     
-def checkWall(player, Walls, maskP) :
-    sign = 0
-    for wall in Walls:
-        maskW = pygame.mask.from_surface(wall.resized)
-        offset = (wall.x - player.x, wall.y - player.y)
-        if maskP.overlap(maskW, offset):
-            sign = 1
-            break
-        
-    return sign
-
-def checkHint(player, Hints, maskP) :
-    sign = 0
-    for hint in Hints:
-        maskH = pygame.mask.from_surface(hint.resized)
-        offset = (hint.x - player.x, hint.y - player.y)
-        if maskP.overlap(maskH, offset):
-            if(hint.question == 1) : sign = 2
-            hint.question = 0
-            break
-        
-    return sign
-           
+            
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
@@ -106,59 +82,63 @@ enemy = Enemy()
 # Holds the level layout in a list of strings.
 level = [
     "WWWWWWWWWWWWWWWWWWWW",
-    "WWWWWWWWWWWWWWWWWBWW",
-    "WW3DDQDDDDDD1WYQDFDD",
-    "WWNWWNWWWWWWNWWZWNWW",
-    "WYFDDRWW3DDDFD1WWNWW",
-    "WWNWW2XWNWWWNWNWYRWW",
-    "WWNWWWWWNWWWNWNWWNWW",
-    "WWNW3DQDSDDDRWNWWNWW",
-    "WWTDRWNWWWWWNWNWWNWW",
-    "WWNWNWTDQXWW2DFDQ4WW",
-    "WWNWNWNWNWWWWWNWNWWW",
-    "WWNWZW2DRW3DDDRWNWWW",
-    "WWNWWWWWNWNWWWNWNWWW",
-    "DDSDXWYDSD4WWYSD4WWW",
-    "WWWWWWWWWWWWWWWWWWWW",
+    "WPPPPPPPPPPPPPPPPBPP",
+    "WP3DDQDDDDDD1WYQDFDD",
+    "WPNWWNPPPPPPNWWZWNPP",
+    "WYFDDRPW3DDDFD1WWNPW",
+    "WPNPP2XWNWWWNPNWYRPW",
+    "WPNWWWWWNWWWNPNWPNPW",
+    "WPNW3DQDSDDDRPNWPNPW",
+    "WPTDRWNPPPWWNPNWPNPW",
+    "WPNPNWTDQXWW2DFDQ4PW",
+    "WPNPNWNPNWWPPPNPNWPW",
+    "WPNPZW2DRW3DDDRPNWPW",
+    "WPNPWWWWNWNWWWNPNWPW",
+    "DDSDXWYDSD4WWYSD4WPW",
+    "PPPPPPPPPPPPPPPPPPPW",
     "WWWWWWWWWWWWWWWWWWWW",
 ]
  
-# Parse the level string above. W = wall
+# Parse the level string above. W = wall, E = exit
 x = y = 0
 for row in level:
     for col in row:
         if col == "W":
             Wall(x, y)
+        if col == "E":
+            enemy = Enemy(x, y)
+        if col == "P":
+            Road("pohon.png", x, y)
         if col == "F":
-            Hint("./img/perempatan.png", x, y)
+            Hint("perempatan.png", x, y)
         if col == "D":
-            Road("./img/datar.png", x, y)
+            Road("datar.png", x, y)
         if col == "N":
-            Road("./img/naik.png", x, y)
+            Road("naik.png", x, y)
         if col == "B":
-            Road("./img/buntu-b.png", x, y)
+            Road("buntu-b.png", x, y)
         if col == "X":
-            Road("./img/buntu-x.png", x, y)
+            Road("buntu-x.png", x, y)
         if col == "Y":
-            Road("./img/buntu-y.png", x, y)
+            Road("buntu-y.png", x, y)
         if col == "Z":
-            Road("./img/buntu-z.png", x, y)
+            Road("buntu-z.png", x, y)
         if col == "1":
-            Road("./img/turn-1.png", x, y)
+            Road("turn-1.png", x, y)
         if col == "2":
-            Road("./img/turn-2.png", x, y)
+            Road("turn-2.png", x, y)
         if col == "3":
-            Road("./img/turn-3.png", x, y)
+            Road("turn-3.png", x, y)
         if col == "4":
-            Road("./img/turn-4.png", x, y)
+            Road("turn-4.png", x, y)
         if col == "Q":
-            Hint("./img/pertigaan-u.png", x, y)
+            Hint("pertigaan-u.png", x, y)
         if col == "R":
-            Hint("./img/pertigaan-r.png", x, y)
+            Hint("pertigaan-r.png", x, y)
         if col == "S":
-            Hint("./img/pertigaan-d.png", x, y)
+            Hint("pertigaan-d.png", x, y)
         if col == "T":
-            Hint("./img/pertigaan-l.png", x, y)
+            Hint("pertigaan-l.png", x, y)
         x += 50
     y += 50
     x = 0
@@ -177,51 +157,53 @@ while running:
     # Move the player if an arrow key is pressed
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
+        sign = 0
         player.move(-1, 0)
         
-        sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
-
+        for wall in Walls:
+            maskW = pygame.mask.from_surface(wall.resized)
+            offset = (wall.x - player.x, wall.y - player.y)
+            if maskP.overlap(maskW, offset):
+                sign = 1
+        
         if sign == 1:
             player.move(1, 0)
-        elif sign == 2:
-            print("Ini Hint")
-            
     if key[pygame.K_RIGHT]:
         sign = 0
         player.move(1, 0)
         
-        sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
+        for wall in Walls:
+            maskW = pygame.mask.from_surface(wall.resized)
+            offset = (wall.x - player.x, wall.y - player.y)
+            if maskP.overlap(maskW, offset):
+                sign = 1
         
         if sign == 1:
             player.move(-1, 0)
-        elif sign == 2:
-            print("Ini Hint")
-            
     if key[pygame.K_UP]:
         sign = 0
         player.move(0, -1)
         
-        sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
+        for wall in Walls:
+            maskW = pygame.mask.from_surface(wall.resized)
+            offset = (wall.x - player.x, wall.y - player.y)
+            if maskP.overlap(maskW, offset):
+                sign = 1
         
         if sign == 1:
             player.move(0, 1)
-        elif sign == 2:
-            print("Ini Hint")
-            
     if key[pygame.K_DOWN]:
         sign = 0
         player.move(0, 1)
         
-        sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
+        for wall in Walls:
+            maskW = pygame.mask.from_surface(wall.resized)
+            offset = (wall.x - player.x, wall.y - player.y)
+            if maskP.overlap(maskW, offset):
+                sign = 1
         
         if sign == 1:
             player.move(0, -1)
-        elif sign == 2:
-            print("Ini Hint")
  
     maskP = pygame.mask.from_surface(player.resized)
     maskE = pygame.mask.from_surface(enemy.resized)
