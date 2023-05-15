@@ -134,18 +134,189 @@ class Questions:
 
             Q_BACK = Button(image=pygame.image.load("img/x.png"), pos=(950, 50))
             Q_BACK.update(self.screen)
+            
+            A_ANS = Button(image=pygame.image.load("img/A.png"), pos=(200, 700))
+            A_ANS.update(self.screen)
+            
+            B_ANS = Button(image=pygame.image.load("img/B.png"), pos=(500, 700))
+            B_ANS.update(self.screen)
+            
+            C_ANS = Button(image=pygame.image.load("img/C.png"), pos=(800, 700))
+            C_ANS.update(self.screen)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if Q_BACK.checkForInput(Q_MOUSE_POS):
+                    if A_ANS.checkForInput(Q_MOUSE_POS):
+                        if self.displayed_image_path == "riddles/Riddle 1.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 5.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 11.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 12.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 15.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 17.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 19.png":
+                            self.displayed_image_path = None
+                            return
+                    elif B_ANS.checkForInput(Q_MOUSE_POS):
+                        if self.displayed_image_path == "riddles/Riddle 2.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 4.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 6.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 8.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 9.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 10.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 13.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 18.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 20.png":
+                            self.displayed_image_path = None
+                            return
+                    elif C_ANS.checkForInput(Q_MOUSE_POS):
+                        if self.displayed_image_path == "riddles/Riddle 3.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 7.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 14.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 16.png":
+                            self.displayed_image_path = None
+                            return
+                        if self.displayed_image_path == "riddles/Riddle 21.png":
+                            self.displayed_image_path = None
+                            return
+                    elif Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return
 
             pygame.display.update()
-            
+    
+# class ImageSelector:
+#     def __init__(self, folder_path):
+#         self.folder_path = folder_path
+    
+#     def get_random_image_path(self):
+#         image_files = [f for f in os.listdir(self.folder_path) if os.path.isfile(os.path.join(self.folder_path, f))]
+#         if image_files:
+#             return os.path.join(self.folder_path, random.choice(image_files))
+#         return None
+
+# class Questions:
+#     def __init__(self):
+#         pygame.init()
+#         self.screen = pygame.display.set_mode((1000, 800))
+#         self.image_selector = ImageSelector("riddles")
+#         self.displayed_image_path = None
+#         self.buttons = []
+
+#     def display(self):
+#         while True:
+#             Q_MOUSE_POS = pygame.mouse.get_pos()
+#             pygame.display.set_caption("Guess The Answer!")
+
+#             if not self.displayed_image_path:
+#                 self.displayed_image_path = self.image_selector.get_random_image_path()
+#                 if self.displayed_image_path:
+#                     image = pygame.image.load(self.displayed_image_path)
+#                     self.screen.blit(image, (0, 0))
+
+#                     self.buttons = []
+#                     button_positions = [
+#                         (200, 700),  # A_ANS position
+#                         (500, 700),  # B_ANS position
+#                         (800, 700)   # C_ANS position
+#                     ]
+#                     for position in button_positions:
+#                         button = Button(pygame.image.load("img/button.png"), position)
+#                         self.buttons.append(button)
+#                         button.update(self.screen)
+
+#             Q_BACK = Button(pygame.image.load("img/x.png"), (950, 50))
+#             Q_BACK.update(self.screen)
+
+#             for event in pygame.event.get():
+#                 if event.type == pygame.QUIT:
+#                     pygame.quit()
+#                     sys.exit()
+#                 if event.type == pygame.MOUSEBUTTONDOWN:
+#                     for button in self.buttons:
+#                         if button.checkForInput(Q_MOUSE_POS):
+#                             self.handle_answer(button)
+#                     if Q_BACK.checkForInput(Q_MOUSE_POS):
+#                         self.displayed_image_path = None
+#                         return
+
+#             pygame.display.update()
+
+    # def handle_answer(self, button):
+    #     answer_mapping = {
+    #         "img/A.png": {
+    #             "riddles/Riddle 1.png": True,
+    #             "riddles/Riddle 5.png": True,
+    #             "riddles/Riddle 11.png": True,
+    #             "riddles/Riddle 12.png": True,
+    #             "riddles/Riddle 15.png": True,
+    #             "riddles/Riddle 17.png": True,
+    #             "riddles/Riddle 19.png": True
+    #         },
+    #         "img/B.png": {
+    #             "riddles/Riddle 2.png": True,
+    #             "riddles/Riddle 4.png": True,
+    #             "riddles/Riddle 6.png": True,
+    #             "riddles/Riddle 8.png": True,
+    #             "riddles/Riddle 9.png": True,
+    #             "riddles/Riddle 10.png": True,
+    #             "riddles/Riddle 13.png": True,
+    #             "riddles/Riddle 18.png": True,
+    #             "riddles/Riddle 20.png": True
+    #         },
+    #         "img/C.png": {
+    #             "riddles/Riddle 3.png": True,
+    #             "riddles/Riddle 7.png": True,
+    #             "riddles/Riddle 14.png": True,
+    #             "riddles/Riddle 16.png": True,
+    #             "riddles/Riddle 21.png": True
+    #         }
+    #     }
+
+    #     if button.image in answer_mapping:
+    #         if self.displayed_image_path in answer_mapping[button.image]:
+    #             self.displayed_image_path = None
+    #             return
+    #     else:
+    #         self.displayed_image_path = None
+    #         return
+        
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
