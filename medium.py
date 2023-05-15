@@ -62,7 +62,31 @@ class Hint(object) :
         self.resized = pygame.transform.scale(self.hint, (50, 50))
         self.x = x
         self.y = y
+        self.question = 1
         Hints.append(self)
+
+def checkWall(player, Walls, maskP) :
+    sign = 0
+    for wall in Walls:
+        maskW = pygame.mask.from_surface(wall.resized)
+        offset = (wall.x - player.x, wall.y - player.y)
+        if maskP.overlap(maskW, offset):
+            sign = 1
+            break
+
+    return sign
+
+def checkHint(player, Hints, maskP) :
+    sign = 0
+    for hint in Hints:
+        maskH = pygame.mask.from_surface(hint.resized)
+        offset = (hint.x - player.x, hint.y - player.y)
+        if maskP.overlap(maskH, offset):
+            if(hint.question == 1) : sign = 2
+            hint.question = 0
+            break
+
+    return sign
         
 def win_page():
     pygame.display.set_caption("Congratulations!")
@@ -172,53 +196,51 @@ while running:
     # Move the player if an arrow key is pressed
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
-        sign = 0
         player.move(-1, 0)
         
-        for wall in Walls:
-            maskW = pygame.mask.from_surface(wall.resized)
-            offset = (wall.x - player.x, wall.y - player.y)
-            if maskP.overlap(maskW, offset):
-                sign = 1
+        sign = checkWall(player, Walls, maskP)
+        sign = checkHint(player, Hints, maskP)
         
         if sign == 1:
             player.move(1, 0)
+        elif sign == 2:
+            print("Ini Hint")
+
     if key[pygame.K_RIGHT]:
         sign = 0
         player.move(1, 0)
         
-        for wall in Walls:
-            maskW = pygame.mask.from_surface(wall.resized)
-            offset = (wall.x - player.x, wall.y - player.y)
-            if maskP.overlap(maskW, offset):
-                sign = 1
+        sign = checkWall(player, Walls, maskP)
+        sign = checkHint(player, Hints, maskP)
         
         if sign == 1:
             player.move(-1, 0)
+        elif sign == 2:
+            print("Ini Hint")
+            
     if key[pygame.K_UP]:
         sign = 0
         player.move(0, -1)
         
-        for wall in Walls:
-            maskW = pygame.mask.from_surface(wall.resized)
-            offset = (wall.x - player.x, wall.y - player.y)
-            if maskP.overlap(maskW, offset):
-                sign = 1
+        sign = checkWall(player, Walls, maskP)
+        sign = checkHint(player, Hints, maskP)
         
         if sign == 1:
             player.move(0, 1)
+        elif sign == 2:
+            print("Ini Hint")
+            
     if key[pygame.K_DOWN]:
         sign = 0
         player.move(0, 1)
         
-        for wall in Walls:
-            maskW = pygame.mask.from_surface(wall.resized)
-            offset = (wall.x - player.x, wall.y - player.y)
-            if maskP.overlap(maskW, offset):
-                sign = 1
+        sign = checkWall(player, Walls, maskP)
+        sign = checkHint(player, Hints, maskP)
         
         if sign == 1:
             player.move(0, -1)
+        elif sign == 2:
+            print("Ini Hint")
  
     maskP = pygame.mask.from_surface(player.resized)
     maskE = pygame.mask.from_surface(enemy.resized)
