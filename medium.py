@@ -2,7 +2,7 @@ import os
 import sys
 import random
 import pygame
- 
+from button import Button
  
 # Class for the orange dude
 class Player(object):
@@ -39,8 +39,8 @@ class Enemy(object):
 
 class Wall(object) :
     
-    def __init__(self, x, y):
-        self.bg = pygame.image.load("img/pohon.png").convert()
+    def __init__(self, img, x, y):
+        self.bg = pygame.image.load(img).convert()
         self.resized = pygame.transform.scale(self.bg, (50, 50))
         self.x = x
         self.y = y
@@ -64,7 +64,7 @@ class Hint(object) :
         self.y = y
         self.question = 1
         Hints.append(self)
-
+        
 def checkWall(player, Walls, maskP) :
     sign = 0
     for wall in Walls:
@@ -72,8 +72,7 @@ def checkWall(player, Walls, maskP) :
         offset = (wall.x - player.x, wall.y - player.y)
         if maskP.overlap(maskW, offset):
             sign = 1
-            break
-
+        
     return sign
 
 def checkHint(player, Hints, maskP) :
@@ -87,6 +86,7 @@ def checkHint(player, Hints, maskP) :
             break
 
     return sign
+
         
 def win_page():
     pygame.display.set_caption("Congratulations!")
@@ -120,7 +120,7 @@ enemy = Enemy()
  
 # Holds the level layout in a list of strings.
 level = [
-    "WWWWWWWWWWWWWWWWWWWW",
+     "WWWWWWWWWWWWWWWWWWWW",
     "WWPPPPPPPPPPBPPPPPPP",
     "WWPYDQDDQDDDFDDQDQDD",
     "WPPPPNPPNPPPNPPZPNPP",
@@ -143,11 +143,11 @@ x = y = 0
 for row in level:
     for col in row:
         if col == "W":
-            Hint("img/background.png", x, y)
+            Wall("img/background.png", x, y)
         if col == "E":
             enemy = Enemy(x, y)
         if col == "P":
-            Wall(x, y)
+            Wall("img/pohon.png", x, y)
         if col == "F":
             Hint("img/perempatan.png", x, y)
         if col == "D":
@@ -196,14 +196,15 @@ while running:
     # Move the player if an arrow key is pressed
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
+        sign = 0
         player.move(-1, 0)
         
         sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
-        
         if sign == 1:
             player.move(1, 0)
-        elif sign == 2:
+        
+        sign = checkHint(player, Hints, maskP)
+        if sign == 2:
             print("Ini Hint")
 
     if key[pygame.K_RIGHT]:
@@ -211,11 +212,11 @@ while running:
         player.move(1, 0)
         
         sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
-        
         if sign == 1:
             player.move(-1, 0)
-        elif sign == 2:
+        
+        sign = checkHint(player, Hints, maskP)
+        if sign == 2:
             print("Ini Hint")
             
     if key[pygame.K_UP]:
@@ -223,11 +224,11 @@ while running:
         player.move(0, -1)
         
         sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
-        
         if sign == 1:
             player.move(0, 1)
-        elif sign == 2:
+        
+        sign = checkHint(player, Hints, maskP)
+        if sign == 2:
             print("Ini Hint")
             
     if key[pygame.K_DOWN]:
@@ -235,11 +236,11 @@ while running:
         player.move(0, 1)
         
         sign = checkWall(player, Walls, maskP)
-        sign = checkHint(player, Hints, maskP)
-        
         if sign == 1:
             player.move(0, -1)
-        elif sign == 2:
+        
+        sign = checkHint(player, Hints, maskP)
+        if sign == 2:
             print("Ini Hint")
  
     maskP = pygame.mask.from_surface(player.resized)
@@ -251,7 +252,7 @@ while running:
         win_page()
         # pygame.quit()
         # sys.exit()
-        
+            
     # Draw the scene
     screen.fill((213, 206, 163))
     #screen.fill((0, 0, 0))
