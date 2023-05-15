@@ -64,6 +64,21 @@ class Hint(object) :
         self.x = x
         self.y = y
         Hints.append(self)
+        
+def win_page():
+    pygame.display.set_caption("Congratulations!")
+
+    FILL = pygame.image.load("img/win.png")
+    SCREEN = pygame.display.set_mode((1000, 800))
+    SCREEN.blit(FILL, (0, 0))
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        pygame.display.update()
             
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -212,8 +227,9 @@ while running:
     offset = (enemy.x - player.x, enemy.y - player.y)
     if maskP.overlap(maskE, offset):
         #print("Collision detected!")
-        pygame.quit()
-        sys.exit()
+        win_page()
+        # pygame.quit()
+        # sys.exit()
         
     # Draw the scene
     screen.fill((213, 206, 163))
