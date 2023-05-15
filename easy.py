@@ -1,8 +1,10 @@
 import os
+import shlex
 import sys
 import random
 import pygame
 from button import Button
+# from main import *
  
 # Class for the orange dude
 class Player(object):
@@ -86,7 +88,6 @@ def checkHint(player, Hints, maskP) :
             break
 
     return sign
-
         
 def win_page():
     pygame.display.set_caption("Congratulations!")
@@ -102,6 +103,48 @@ def win_page():
                 sys.exit()
 
         pygame.display.update()
+        
+class ImageSelector:
+    def __init__(self, folder_path):
+        self.folder_path = folder_path
+    
+    def get_random_image_path(self):
+        image_files = [f for f in os.listdir(self.folder_path) if os.path.isfile(os.path.join(self.folder_path, f))]
+        if image_files:
+            return os.path.join(self.folder_path, random.choice(image_files))
+        return None
+    
+class Questions:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((1000, 800))
+        self.image_selector = ImageSelector("riddles")
+        self.displayed_image_path = None
+
+    def display(self):
+        while True:
+            Q_MOUSE_POS = pygame.mouse.get_pos()
+            pygame.display.set_caption("Guess The Answer!")
+
+            if not self.displayed_image_path:
+                self.displayed_image_path = self.image_selector.get_random_image_path()
+                if self.displayed_image_path:
+                    image = pygame.image.load(self.displayed_image_path)
+                    self.screen.blit(image, (0, 0))
+
+            Q_BACK = Button(image=pygame.image.load("img/x.png"), pos=(950, 50))
+            Q_BACK.update(self.screen)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if Q_BACK.checkForInput(Q_MOUSE_POS):
+                        self.displayed_image_path = None
+                        return
+
+            pygame.display.update()
             
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -205,7 +248,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
 
     if key[pygame.K_RIGHT]:
         sign = 0
@@ -217,7 +262,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
             
     if key[pygame.K_UP]:
         sign = 0
@@ -229,7 +276,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
             
     if key[pygame.K_DOWN]:
         sign = 0
@@ -241,7 +290,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
  
     maskP = pygame.mask.from_surface(player.resized)
     maskE = pygame.mask.from_surface(enemy.resized)

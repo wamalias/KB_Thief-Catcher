@@ -2,6 +2,9 @@ import pygame, sys
 from button import Button
 import subprocess
 
+import os
+import random
+
 pygame.init()
 
 SCREEN = pygame.display.set_mode((1000, 800))
@@ -44,7 +47,7 @@ def play():
                     run_game("hard.py")
 
         pygame.display.update()
-    
+
 def about():
     while True:
         ABOUT_MOUSE_POS = pygame.mouse.get_pos()
