@@ -88,7 +88,7 @@ def checkHint(player, Hints, maskP) :
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
                 sign = 2
-                path.check(hint.index)
+                path.find()
             hint.question = 0
             break
 
@@ -203,7 +203,6 @@ level = [
     "WWWWWWWWWWWWWWWWWWWW",
 ]
 
-path.map (level)
 # Parse the level string above. W = wall, E = exit
 x = y = 0
 index = 'A'
