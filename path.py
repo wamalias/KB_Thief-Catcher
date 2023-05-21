@@ -46,10 +46,17 @@ class peta:
                     k = parrent[k]
                 
                 #Menambahkan kota titik awal ke final rute
-                final_rute.append(start)
+                #final_rute.append(start)
                 #Membalik urutan kota di final rute agar menjadi urutan yang baik
                 final_rute.reverse()
                 print('Rute A* Search: {}'.format(final_rute))
+                for (n, j, weight) in kotakab.cabang(start):
+                    if j == final_rute[0] :
+                        if(n == 1) : print('LEFT')
+                        elif(n == 2) : print('TOP')
+                        elif(n == 3) : print('RIGHT')
+                        elif(n == 4) : print('DOWN')
+                    
                 return final_rute
             
             #Menentukan kota yang akan diexpand selanjutnya
