@@ -66,6 +66,7 @@ class Hint(object) :
         self.resized = pygame.transform.scale(self.hint, (50, 50))
         self.x = x
         self.y = y
+        self.index = index
         self.question = 1
         Hints.append(self)
         path.append(abs(self.x - 950), abs(self.y - 100), index)
@@ -88,7 +89,7 @@ def checkHint(player, Hints, maskP) :
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
                 sign = 2
-                path.find('[', 'E')
+                path.find(hint.index, 'E')
             hint.question = 0
             break
 

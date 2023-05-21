@@ -89,7 +89,7 @@ def checkHint(player, Hints, maskP) :
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
                 sign = 2
-                path.find('S', 'C')
+                path.find(hint.index, 'C')
             hint.question = 0
             break
 
