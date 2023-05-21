@@ -141,32 +141,39 @@ class Questions:
             A_ANS = Button(image=pygame.image.load("img/A.png"), pos=(200, 700))
             B_ANS = Button(image=pygame.image.load("img/B.png"), pos=(500, 700))
             C_ANS = Button(image=pygame.image.load("img/C.png"), pos=(800, 700))
-            
+
             for button in [Q_BACK, A_ANS, B_ANS, C_ANS]:
                 button.update(self.screen)
-            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if A_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in ["riddles/Riddle 1.png", "riddles/Riddle 5.png", "riddles/Riddle 11.png", "riddles/Riddle 12.png", "riddles/Riddle 15.png", "riddles/Riddle 17.png", "riddles/Riddle 19.png"]:
-                            self.displayed_image_path = None
-                            return
+                        if self.displayed_image_path in ["riddles/1.png", "riddles/5.png", "riddles/11.png", "riddles/12.png", "riddles/15.png", "riddles/17.png", "riddles/19.png"]:
+                            print("Benar")
+                        else:
+                            print("Salah")
+
                     if B_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in ["riddles/Riddle 2.png", "riddles/Riddle 4.png", "riddles/Riddle 6.png", "riddles/Riddle 8.png", "riddles/Riddle 9.png", "riddles/Riddle 10.png", "riddles/Riddle 13.png", "riddles/Riddle 18.png", "riddles/Riddle 20.png"]:
-                            self.displayed_image_path = None
-                            return
+                        if self.displayed_image_path in ["riddles/2.png", "riddles/4.png", "riddles/6.png", "riddles/8.png", "riddles/9.png", "riddles/10.png", "riddles/13.png", "riddles/18.png", "riddles/20.png"]:
+                            print("Benar")
+                        else:
+                            print("Salah")
+
                     if C_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in ["riddles/Riddle 3.png", "riddles/Riddle 7.png", "riddles/Riddle 14.png", "riddles/Riddle 16.png", "riddles/Riddle 21.png"]:
-                            self.displayed_image_path = None
-                            return
+                        if self.displayed_image_path in ["riddles/3.png", "riddles/7.png", "riddles/14.png", "riddles/16.png", "riddles/21.png"]:
+                            print("Benar")
+                        else:
+                            print("Salah")
+
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return
 
-            pygame.display.update()    
+            pygame.display.update()   
              
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
