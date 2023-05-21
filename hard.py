@@ -106,6 +106,79 @@ def win_page():
                 sys.exit()
 
         pygame.display.update()
+        
+class ImageSelector:
+    def __init__(self, folder_path):
+        self.folder_path = folder_path
+    
+    def get_random_image_path(self):
+        image_files = [f for f in os.listdir(self.folder_path) if os.path.isfile(os.path.join(self.folder_path, f))]
+        if image_files:
+            return os.path.join(self.folder_path, random.choice(image_files))
+        return None
+    
+class Questions:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((1000, 800))
+        self.image_selector = ImageSelector("riddlesMedium")
+        self.displayed_image_path = None
+
+    def display(self):
+        while True:
+            Q_MOUSE_POS = pygame.mouse.get_pos()
+            pygame.display.set_caption("Guess The Answer!")
+
+            if not self.displayed_image_path:
+                self.displayed_image_path = self.image_selector.get_random_image_path()
+                if self.displayed_image_path:
+                    image = pygame.image.load(self.displayed_image_path)
+                    self.screen.blit(image, (0, 0))
+
+            Q_BACK = Button(image=pygame.image.load("img/x.png"), pos=(950, 50))
+            A_ANS = Button(image=pygame.image.load("img/A.png"), pos=(200, 700))
+            B_ANS = Button(image=pygame.image.load("img/B.png"), pos=(500, 700))
+            C_ANS = Button(image=pygame.image.load("img/C.png"), pos=(800, 700))
+
+            for button in [Q_BACK, A_ANS, B_ANS, C_ANS]:
+                button.update(self.screen)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+            
+                correct_paths_set_A = { "riddlesHard/1.png", "riddlesHard/2.png", "riddlesHard/9.png","riddlesHard/10.png", "riddlesHard/13.png", "riddlesHard/23.png", "riddlesHard/33.png"}
+                correct_paths_set_B = { "riddlesHard/3.png", "riddlesHard/4.png", "riddlesHard/7.png", "riddlesHard/8.png", "riddlesHard/16.png", "riddlesHard/17.png", "riddlesHard/20.png", "riddlesHard/22.png", "riddlesHard/26.png", "riddlesHard/27.png", "riddlesHard/30.png", "riddlesHard/32.png", "riddlesHard/36.png", "riddlesHard/37.png"}
+                correct_paths_set_C = { "riddlesHard/5.png", "riddlesHard/6.png", "riddlesHard/11.png", "riddlesHard/12.png", "riddlesHard/14.png", "riddlesHard/15.png", "riddlesHard/18.png", "riddlesHard/19.png", "riddlesHard/1.png", "riddlesHard/21.png", "riddlesHard/24.png", "riddlesHard/25.png", "riddlesHard/28.png", "riddlesHard/29.png", "riddlesHard/31.png", "riddlesHard/34.png", "riddlesHard/35.png"}
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if A_ANS.checkForInput(Q_MOUSE_POS):
+                        if self.displayed_image_path in correct_paths_set_A:
+                            response = "Benar"
+                        else:
+                            response = "Salah"
+                        print(response)
+                        
+                    if B_ANS.checkForInput(Q_MOUSE_POS):
+                        if self.displayed_image_path in correct_paths_set_B:
+                            response = "Benar"
+                        else:
+                            response = "Salah"
+                        print(response)
+                        
+                    if C_ANS.checkForInput(Q_MOUSE_POS):
+                        if self.displayed_image_path in correct_paths_set_C:
+                            response = "Benar"
+                        else:
+                            response = "Salah"
+                        print(response)
+
+                    if Q_BACK.checkForInput(Q_MOUSE_POS):
+                        self.displayed_image_path = None
+                        return
+
+            pygame.display.update()  
 
 def display_timer(screen, elapsed_time):
     font = pygame.font.Font(None, 36)
@@ -197,7 +270,7 @@ for row in level:
     y += 50
     x = 0
  
-MAX_PLAY_TIME = 10  # 3 minutes in seconds
+MAX_PLAY_TIME = 60  # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
