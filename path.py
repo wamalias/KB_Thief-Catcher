@@ -83,9 +83,9 @@ def append(x, y, index):
     Nodes.append(index)
     Heur[index] = x + y
     
-def find() :
+def find(start, finish) :
     graph = peta(Mgraph)
-    graph.A_star('S', 'C')
+    graph.A_star(start, finish)
     
 pos = []    
 map = []

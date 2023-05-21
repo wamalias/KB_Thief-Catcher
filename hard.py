@@ -61,13 +61,14 @@ class Road(object) :
 
 class Hint(object) :
     
-    def __init__(self, img, x, y):
+    def __init__(self, img, x, y, index):
         self.hint = pygame.image.load(img).convert()
         self.resized = pygame.transform.scale(self.hint, (50, 50))
         self.x = x
         self.y = y
         self.question = 1
         Hints.append(self)
+        path.append(abs(self.x - 950), abs(self.y - 100), index)
         
 def checkWall(player, Walls, maskP) :
     sign = 0
@@ -75,7 +76,8 @@ def checkWall(player, Walls, maskP) :
         maskW = pygame.mask.from_surface(wall.resized)
         offset = (wall.x - player.x, wall.y - player.y)
         if maskP.overlap(maskW, offset):
-            sign = 1
+            if maskP.overlap(maskW, offset):
+                sign = 1
         
     return sign
 
@@ -85,7 +87,9 @@ def checkHint(player, Hints, maskP) :
         maskH = pygame.mask.from_surface(hint.resized)
         offset = (hint.x - player.x, hint.y - player.y)
         if maskP.overlap(maskH, offset):
-            if(hint.question == 1) : sign = 2
+            if(hint.question == 1) : 
+                sign = 2
+                path.find('b', 'E')
             hint.question = 0
             break
 
@@ -228,47 +232,71 @@ level = [
  
 # Parse the level string above. W = wall, E = exit
 x = y = 0
+index = 'A'
 for row in level:
     for col in row:
         if col == "W":
             Wall("img/background.png", x, y)
-        if col == "E":
-            enemy = Enemy(x, y)
+            path.draw("#")
         if col == "P":
             Wall("img/pohon.png", x, y)
+            path.draw("#")
         if col == "F":
-            Hint("img/perempatan.png", x, y)
+            Hint("img/perempatan.png", x, y, index)
+            path.draw(index)
+            index = chr(ord(index) + 1)
         if col == "D":
             Road("img/datar.png", x, y)
+            path.draw("*")
         if col == "N":
             Road("img/naik.png", x, y)
+            path.draw("*")
         if col == "B":
             Road("img/buntu-b.png", x, y)
+            path.draw("!")
         if col == "X":
             Road("img/buntu-x.png", x, y)
+            path.draw("!")
         if col == "Y":
             Road("img/buntu-y.png", x, y)
+            path.draw("!")
         if col == "Z":
             Road("img/buntu-z.png", x, y)
+            path.draw("!")
         if col == "1":
             Road("img/turn-1.png", x, y)
+            path.draw("1")
         if col == "2":
             Road("img/turn-2.png", x, y)
+            path.draw("2")
         if col == "3":
             Road("img/turn-3.png", x, y)
+            path.draw("3")
         if col == "4":
             Road("img/turn-4.png", x, y)
+            path.draw("4")
         if col == "Q":
-            Hint("img/pertigaan-u.png", x, y)
+            Hint("img/pertigaan-u.png", x, y, index)
+            path.draw(index)
+            index = chr(ord(index) + 1)
         if col == "R":
-            Hint("img/pertigaan-r.png", x, y)
+            Hint("img/pertigaan-r.png", x, y, index)
+            path.draw(index)
+            index = chr(ord(index) + 1)
         if col == "S":
-            Hint("img/pertigaan-d.png", x, y)
+            Hint("img/pertigaan-d.png", x, y, index)
+            path.draw(index)
+            index = chr(ord(index) + 1)
         if col == "T":
-            Hint("img/pertigaan-l.png", x, y)
+            Hint("img/pertigaan-l.png", x, y, index)
+            path.draw(index)
+            index = chr(ord(index) + 1)
         x += 50
     y += 50
     x = 0
+
+path.roadMap()
+path.printG() 
  
 MAX_PLAY_TIME = 60  # 3 minutes in seconds
 start_time = time.time()

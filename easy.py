@@ -89,7 +89,7 @@ def checkHint(player, Hints, maskP) :
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
                 sign = 2
-                path.find()
+                path.find('S', 'C')
             hint.question = 0
             break
 
@@ -293,14 +293,14 @@ for row in level:
         x += 50
     y += 50
     x = 0
+
+path.roadMap()
+path.printG() 
  
 MAX_PLAY_TIME = 10  # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
-    
-path.roadMap()
-path.printG() 
 running = True
 while running:
     clock.tick(60)   
