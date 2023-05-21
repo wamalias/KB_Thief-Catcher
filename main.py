@@ -47,7 +47,7 @@ def play():
                     run_game("hard.py")
 
         pygame.display.update()
-
+          
 def about():
     while True:
         ABOUT_MOUSE_POS = pygame.mouse.get_pos()

@@ -236,44 +236,59 @@ for row in level:
     for col in row:
         if col == "W":
             Wall("img/background.png", x, y)
-        if col == "E":
-            enemy = Enemy(x, y)
+            path.draw("#")
         if col == "P":
             Wall("img/pohon.png", x, y)
+            path.draw("#")
         if col == "F":
             Hint("img/perempatan.png", x, y, index)
+            path.draw(index)
             index = chr(ord(index) + 1)
         if col == "D":
             Road("img/datar.png", x, y)
+            path.draw("*")
         if col == "N":
             Road("img/naik.png", x, y)
+            path.draw("*")
         if col == "B":
             Road("img/buntu-b.png", x, y)
+            path.draw("!")
         if col == "X":
             Road("img/buntu-x.png", x, y)
+            path.draw("!")
         if col == "Y":
             Road("img/buntu-y.png", x, y)
+            path.draw("!")
         if col == "Z":
             Road("img/buntu-z.png", x, y)
+            path.draw("!")
         if col == "1":
             Road("img/turn-1.png", x, y)
+            path.draw("1")
         if col == "2":
             Road("img/turn-2.png", x, y)
+            path.draw("2")
         if col == "3":
             Road("img/turn-3.png", x, y)
+            path.draw("3")
         if col == "4":
             Road("img/turn-4.png", x, y)
+            path.draw("4")
         if col == "Q":
             Hint("img/pertigaan-u.png", x, y, index)
+            path.draw(index)
             index = chr(ord(index) + 1)
         if col == "R":
             Hint("img/pertigaan-r.png", x, y, index)
+            path.draw(index)
             index = chr(ord(index) + 1)
         if col == "S":
             Hint("img/pertigaan-d.png", x, y, index)
+            path.draw(index)
             index = chr(ord(index) + 1)
         if col == "T":
             Hint("img/pertigaan-l.png", x, y, index)
+            path.draw(index)
             index = chr(ord(index) + 1)
         x += 50
     y += 50
@@ -283,6 +298,9 @@ MAX_PLAY_TIME = 10  # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
+    
+path.roadMap()
+path.printG() 
 running = True
 while running:
     clock.tick(60)   

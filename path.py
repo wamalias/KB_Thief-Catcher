@@ -1,27 +1,3 @@
-jarak = {
-    'A': [('D', 250), ('E', 100), ('F', 450)],
-    'B': [('C', 100)],
-    'C': [('B', 100), ('G', 150)],
-    'D': [('A', 250), ('E', 150), ('K', 200)],
-    'E': [('A', 100),('D', 150) ],
-    'F': [('A', 450), ('I', 350), ('J', 150), ('O', 350)],
-    'G': [('C', 150), ('P', 250)],
-    'H': [('L', 150), ('M', 100), ('I', 100)], 
-    'I': [('F', 350), ('H', 100), ('J', 200)],
-    'J': [('I', 200), ('F', 150), ('O', 200)],
-    'K': [('D', 200), ('L', 100), ('S', 250)],
-    'L': [('H', 150), ('K', 100)],
-    'M': [('H', 100), ('N', 100), ('Q', 200)],
-    'N': [('M', 100), ('Q', 100)],
-    'O': [('F', 350), ('J', 200), ('P', 100), ('R', 100)],
-    'P': [('O', 100), ('G', 250), ('U', 300)],
-    'Q': [('M', 200), ('N', 100), ('T', 100)],
-    'R': [('T', 500), ('U', 100), ('O', 100)],
-    'S': [('K', 250)],
-    'T': [('Q', 100), ('R', 500)],
-    'U': [('R', 100), ('P', 300)]
-} 
-
 class peta:
     #Inisiasi sesuai set jarak yang sudah ditentukan
     def __init__(kotakab, jarak):
@@ -32,30 +8,7 @@ class peta:
         return kotakab.jarak[val]
     
     def heur(kotakab, val):
-        heuristik = {
-            'A' : 700,
-            'B' : 200,
-            'C' : 100,
-            'D' : 950,
-            'E' : 800,
-            'F' : 450,
-            'G' : 250,
-            'H' : 900,
-            'I' : 800,
-            'J' : 600,
-            'K' : 1150,
-            'L' : 1050,
-            'M' : 1000,
-            'N' : 900,
-            'O' : 600,
-            'P' : 500,
-            'Q' : 1000,
-            'R' : 700,
-            'S' : 1400,
-            'T' : 1100,
-            'U' : 800
-        }
-        return heuristik[val]
+        return Heur[val]
     
     def A_star(kotakab, start, finish):
         #Set untuk menyimpan kota yang diexpand. Dimulai dari kota yang menjadi titik start
@@ -100,7 +53,7 @@ class peta:
                 return final_rute
             
             #Menentukan kota yang akan diexpand selanjutnya
-            for (j, weight) in kotakab.cabang(k):
+            for (n, j, weight) in kotakab.cabang(k):
                 if j not in rute and j not in past:
                     rute.add(j)
                     parrent[j] = k
@@ -122,17 +75,13 @@ class peta:
         #Jika tidak ada rute yang memenuhi
         print('Rute tidak tesedia')
         return None
-    
-class Branch (object) :  
-    def __init__(self, index, heur):
-        self.index = index
-        self.heur = heur
-        Nodes.append(self)
 
 Nodes = []
+Heur = {}
 
 def append(x, y, index):
-    Branch(index, x+y)
+    Nodes.append(index)
+    Heur[index] = x + y
     
     #for Node in Nodes :
     #    print(Node.index, Node.heur)
@@ -147,5 +96,160 @@ def check(path) :
     print(start.index, start.heur)
     
 def find() :
-    graph = peta(jarak)
+    graph = peta(Mgraph)
     graph.A_star('S', 'C')
+    
+pos = []    
+map = []
+Mgraph = {}
+
+def insertPos(index) :
+    pos.append(index)
+    #print(pos)
+    
+def draw(sign) :
+    map.append(sign)
+    
+def roadMap() :
+    i  = 0
+    for element in Nodes :
+        temp = []
+        
+        #Search left branch
+        i = map.index(element) - 1
+        sign = 'l'
+        distance_l = 0
+        while(i > 0 and i < len(map)) :
+            #print(map[i])
+            distance_l += 1
+            if(map[i] == '1') :
+                sign = 'l'
+            elif(map[i] == '2') :
+                sign = 'u'
+            elif(map[i] == '3') :
+                sign = 'd'
+            elif(map[i] == '4') :
+                sign = 'l'
+            elif(map[i] == "*") :
+                sign = sign
+            elif(map[i] == "!") :
+                sign = 'f'
+            elif(map[i] == '#') :
+                sign = 'f'
+            else :
+                tpl = (1, map[i], distance_l)
+                temp.append(tpl)
+                #roadMap(map[i])
+                sign = 'f'
+        
+            if(sign == 'd') : i += 20
+            elif(sign == 'u') : i -= 20
+            elif(sign == 'l') : i -= 1
+            elif(sign == 'f') : i = 0
+    
+        
+        #Search top branch
+        i = map.index(element) - 20
+        sign = 'u'
+        distance_u = 0
+        while(i > 0 and i < len(map)) :
+            #print(map[i])
+            distance_u += 1
+            if(map[i] == '1') :
+                sign = 'l'
+            elif(map[i] == '2') :
+                sign = 'u'
+            elif(map[i] == '3') :
+                sign = 'r'
+            elif(map[i] == '4') :
+                sign = 'l'
+            elif(map[i] == "*") :
+                sign = sign
+            elif(map[i] == "!") :
+                sign = 'f'
+            elif(map[i] == '#') :
+                sign = 'f'
+            else :
+                tpl = (2, map[i], distance_u)
+                temp.append(tpl)
+                #roadMap(map[i])
+                sign = 'f'
+            
+            if(sign == 'd') : i += 20
+            elif(sign == 'u') : i -= 20
+            elif(sign == 'l') : i -= 1
+            elif(sign == 'r') : i += 1
+            elif(sign == 'f') : i = 0
+        
+        #Search right branch
+        i = map.index(element) + 1
+        sign = 'r'
+        distance_r = 0
+        while(i > 0 and i < len(map)) :
+            #print(map[i])
+            distance_r += 1
+            if(map[i] == '1') :
+                sign = 'd'
+            elif(map[i] == '2') :
+                sign = 'r'
+            elif(map[i] == '3') :
+                sign = 'r'
+            elif(map[i] == '4') :
+                sign = 'u'
+            elif(map[i] == "*") :
+                sign = sign
+            elif(map[i] == "!") :
+                sign = 'f'
+            elif(map[i] == '#') :
+                sign = 'f'
+            else :
+                tpl = (3, map[i], distance_r)
+                temp.append(tpl)
+                sign = 'f'
+            
+            if(sign == 'd') : i += 20
+            elif(sign == 'u') : i -= 20
+            elif(sign == 'l') : i -= 1
+            elif(sign == 'r') : i += 1
+            elif(sign == 'f') : i = 0
+
+        #Search bottom branch
+        i = map.index(element) + 20
+        sign = 'd'
+        distance_d = 0
+        while(i > 0 and i < len(map)) :
+            #print(map[i])
+            distance_d += 1
+            if(map[i] == '1') :
+                sign = 'd'
+            elif(map[i] == '2') :
+                sign = 'r'
+            elif(map[i] == '3') :
+                sign = 'd'
+            elif(map[i] == '4') :
+                sign = 'l'
+            elif(map[i] == "*") :
+                sign = sign
+            elif(map[i] == "!") :
+                sign = 'f'
+            elif(map[i] == '#') :
+                sign = 'f'
+            else :
+                tpl = (4, map[i], distance_d)
+                temp.append(tpl)
+                sign = 'f'
+            
+            if(sign == 'd') : i += 20
+            elif(sign == 'u') : i -= 20
+            elif(sign == 'l') : i -= 1
+            elif(sign == 'r') : i += 1
+            elif(sign == 'f') : i = 0
+            
+        Mgraph[element] = temp
+     
+def printG() :
+    for node, branch in Mgraph.items():
+        print(node, branch)
+        
+    for node, weight in Heur.items():
+        print(node, weight)
