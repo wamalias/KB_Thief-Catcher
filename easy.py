@@ -5,8 +5,9 @@ import random
 import pygame
 from button import Button
 import path
+import time
 # from main import *
- 
+
 # Class for the orange dude
 class Player(object):
     
@@ -149,32 +150,50 @@ class Questions:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+            
+                correct_paths_set_A = { "riddles/1.png", "riddles/5.png", "riddles/11.png", "riddles/12.png", "riddles/15.png", "riddles/17.png", "riddles/19.png"}
+                correct_paths_set_B = { "riddles/2.png", "riddles/4.png", "riddles/6.png", "riddles/8.png", "riddles/9.png", "riddles/10.png", "riddles/13.png", "riddles/18.png", "riddles/20.png"}
+                correct_paths_set_C = { "riddles/3.png", "riddles/7.png", "riddles/14.png", "riddles/16.png", "riddles/21.png"}
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if A_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in ["riddles/1.png", "riddles/5.png", "riddles/11.png", "riddles/12.png", "riddles/15.png", "riddles/17.png", "riddles/19.png"]:
-                            print("Benar")
+                        if self.displayed_image_path in correct_paths_set_A:
+                            response = "Benar"
                         else:
-                            print("Salah")
-
+                            response = "Salah"
+                        print(response)
+                        
                     if B_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in ["riddles/2.png", "riddles/4.png", "riddles/6.png", "riddles/8.png", "riddles/9.png", "riddles/10.png", "riddles/13.png", "riddles/18.png", "riddles/20.png"]:
-                            print("Benar")
+                        if self.displayed_image_path in correct_paths_set_B:
+                            response = "Benar"
                         else:
-                            print("Salah")
-
+                            response = "Salah"
+                        print(response)
+                        
                     if C_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in ["riddles/3.png", "riddles/7.png", "riddles/14.png", "riddles/16.png", "riddles/21.png"]:
-                            print("Benar")
+                        if self.displayed_image_path in correct_paths_set_C:
+                            response = "Benar"
                         else:
-                            print("Salah")
+                            response = "Salah"
+                        print(response)
 
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return
 
             pygame.display.update()   
-             
+
+def display_timer(screen, elapsed_time):
+    font = pygame.font.Font(None, 36)
+    timer_text = font.render("Time: " + format_time(elapsed_time), True, (0, 0, 0))
+    screen.blit(timer_text, (10, 10))
+
+def format_time(secs):
+    mins = secs // 60
+    secs = secs % 60
+    time_format = "{:02d}:{:02d}".format(int(mins), int(secs))
+    return time_format
+           
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
@@ -182,7 +201,7 @@ pygame.init()
 # Set up the display
 pygame.display.set_caption("Help Detective to Catch the Thief!")
 screen = pygame.display.set_mode((1000, 800))
- 
+
 clock = pygame.time.Clock()
 Walls = []
 Roads = []
@@ -260,10 +279,13 @@ for row in level:
     y += 50
     x = 0
  
+MAX_PLAY_TIME = 10  # 3 minutes in seconds
+start_time = time.time()
+elapsed_time = 0
+
 running = True
 while running:
-    
-    clock.tick(60)
+    clock.tick(60)   
     
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
@@ -338,7 +360,16 @@ while running:
         win_page()
         # pygame.quit()
         # sys.exit()
-            
+    
+    # Calculate elapsed time
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+
+    # Check if the maximum play time is reached
+    if elapsed_time >= MAX_PLAY_TIME:
+        print("Kamu kalah!")
+        running = False
+          
     # Draw the scene
     screen.fill((213, 206, 163))
     #screen.fill((0, 0, 0))
@@ -350,6 +381,9 @@ while running:
          screen.blit(hint.resized, (hint.x, hint.y))
     screen.blit(enemy.resized, (enemy.x, enemy.y))
     screen.blit(player.resized, (player.x, player.y))
+    
+    # Display the timer
+    display_timer(screen, elapsed_time)
     
     pygame.display.flip()
     clock.tick(360)
