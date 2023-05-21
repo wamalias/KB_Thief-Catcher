@@ -95,10 +95,10 @@ def checkHint(player, Hints, maskP) :
 
     return sign
         
-def win_page():
+def final_page(page):
     pygame.display.set_caption("Congratulations!")
 
-    FILL = pygame.image.load("img/win.png")
+    FILL = pygame.image.load(page)
     SCREEN = pygame.display.set_mode((1000, 800))
     SCREEN.blit(FILL, (0, 0))
 
@@ -357,7 +357,7 @@ while running:
     offset = (enemy.x - player.x, enemy.y - player.y)
     if maskP.overlap(maskE, offset):
         #print("Collision detected!")
-        win_page()
+        final_page("img/win.png")
         # pygame.quit()
         # sys.exit()
     
@@ -367,8 +367,7 @@ while running:
 
     # Check if the maximum play time is reached
     if elapsed_time >= MAX_PLAY_TIME:
-        print("Kamu kalah!")
-        running = False
+        final_page("img/lose.png")
           
     # Draw the scene
     screen.fill((213, 206, 163))
