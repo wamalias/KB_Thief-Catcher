@@ -83,18 +83,6 @@ def append(x, y, index):
     Nodes.append(index)
     Heur[index] = x + y
     
-    #for Node in Nodes :
-    #    print(Node.index, Node.heur)
-    #print("\n\n")
-    
-def check(path) :
-    start = '#'
-    for branch in Nodes :
-        if(branch.index == path) :
-            start = branch
-            
-    print(start.index, start.heur)
-    
 def find() :
     graph = peta(Mgraph)
     graph.A_star('S', 'C')
@@ -102,10 +90,6 @@ def find() :
 pos = []    
 map = []
 Mgraph = {}
-
-def insertPos(index) :
-    pos.append(index)
-    #print(pos)
     
 def draw(sign) :
     map.append(sign)
@@ -137,7 +121,7 @@ def roadMap() :
             elif(map[i] == '#') :
                 sign = 'f'
             else :
-                tpl = (1, map[i], distance_l)
+                tpl = (1, map[i], distance_l*50)
                 temp.append(tpl)
                 #roadMap(map[i])
                 sign = 'f'
@@ -170,7 +154,7 @@ def roadMap() :
             elif(map[i] == '#') :
                 sign = 'f'
             else :
-                tpl = (2, map[i], distance_u)
+                tpl = (2, map[i], distance_u*50)
                 temp.append(tpl)
                 #roadMap(map[i])
                 sign = 'f'
@@ -203,7 +187,7 @@ def roadMap() :
             elif(map[i] == '#') :
                 sign = 'f'
             else :
-                tpl = (3, map[i], distance_r)
+                tpl = (3, map[i], distance_r*50)
                 temp.append(tpl)
                 sign = 'f'
             
@@ -235,7 +219,7 @@ def roadMap() :
             elif(map[i] == '#') :
                 sign = 'f'
             else :
-                tpl = (4, map[i], distance_d)
+                tpl = (4, map[i], distance_d*50)
                 temp.append(tpl)
                 sign = 'f'
             
