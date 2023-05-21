@@ -1,8 +1,12 @@
 import os
+import shlex
 import sys
 import random
 import pygame
 from button import Button
+import path
+import time
+# from main import *
  
 # Class for the orange dude
 class Player(object):
@@ -102,7 +106,18 @@ def win_page():
                 sys.exit()
 
         pygame.display.update()
-            
+
+def display_timer(screen, elapsed_time):
+    font = pygame.font.Font(None, 36)
+    timer_text = font.render("Time: " + format_time(elapsed_time), True, (0, 0, 0))
+    screen.blit(timer_text, (10, 10))
+
+def format_time(secs):
+    mins = secs // 60
+    secs = secs % 60
+    time_format = "{:02d}:{:02d}".format(int(mins), int(secs))
+    return time_format
+
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
@@ -182,10 +197,13 @@ for row in level:
     y += 50
     x = 0
  
+MAX_PLAY_TIME = 10  # 3 minutes in seconds
+start_time = time.time()
+elapsed_time = 0
+
 running = True
 while running:
-    
-    clock.tick(60)
+    clock.tick(60)   
     
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
@@ -205,7 +223,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
 
     if key[pygame.K_RIGHT]:
         sign = 0
@@ -217,7 +237,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
             
     if key[pygame.K_UP]:
         sign = 0
@@ -229,7 +251,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
             
     if key[pygame.K_DOWN]:
         sign = 0
@@ -241,7 +265,9 @@ while running:
         
         sign = checkHint(player, Hints, maskP)
         if sign == 2:
-            print("Ini Hint")
+            QUESTION = Questions()
+            QUESTION.display()
+            # print("Ini Hint")
  
     maskP = pygame.mask.from_surface(player.resized)
     maskE = pygame.mask.from_surface(enemy.resized)
@@ -252,7 +278,16 @@ while running:
         win_page()
         # pygame.quit()
         # sys.exit()
-            
+    
+    # Calculate elapsed time
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+
+    # Check if the maximum play time is reached
+    if elapsed_time >= MAX_PLAY_TIME:
+        print("Kamu kalah!")
+        running = False
+          
     # Draw the scene
     screen.fill((213, 206, 163))
     #screen.fill((0, 0, 0))
@@ -264,6 +299,9 @@ while running:
          screen.blit(hint.resized, (hint.x, hint.y))
     screen.blit(enemy.resized, (enemy.x, enemy.y))
     screen.blit(player.resized, (player.x, player.y))
+    
+    # Display the timer
+    display_timer(screen, elapsed_time)
     
     pygame.display.flip()
     clock.tick(360)
