@@ -336,7 +336,7 @@ game_sound = SoundEffectGame()
 game_sound.load_sound_effect("play", "sounds/play.mp3")
 game_sound.play_sound_effect("play")
  
-MAX_PLAY_TIME = 10  # 3 minutes in seconds
+MAX_PLAY_TIME = 180  # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
