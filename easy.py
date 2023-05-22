@@ -95,8 +95,8 @@ def checkHint(player, Hints, maskP) :
 
     return sign
         
-def final_page(page):
-    pygame.display.set_caption("Congratulations!")
+def final_page(page, caption):
+    pygame.display.set_caption(caption)
 
     FILL = pygame.image.load(page)
     SCREEN = pygame.display.set_mode((1000, 800))
@@ -183,9 +183,9 @@ class Questions:
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return
-
+                    
             pygame.display.update()   
-
+           
 def display_timer(screen, elapsed_time):
     font = pygame.font.Font(None, 36)
     timer_text = font.render("Time: " + format_time(elapsed_time), True, (0, 0, 0))
@@ -196,7 +196,7 @@ def format_time(secs):
     secs = secs % 60
     time_format = "{:02d}:{:02d}".format(int(mins), int(secs))
     return time_format
-           
+
 # Initialise pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
@@ -378,7 +378,7 @@ while running:
     offset = (enemy.x - player.x, enemy.y - player.y)
     if maskP.overlap(maskE, offset):
         #print("Collision detected!")
-        final_page("img/win.png")
+        final_page("img/win.png", "Congratulations! You Win!")
         # pygame.quit()
         # sys.exit()
     
@@ -388,7 +388,7 @@ while running:
 
     # Check if the maximum play time is reached
     if elapsed_time >= MAX_PLAY_TIME:
-        final_page("img/lose.png")
+        final_page("img/lose.png", "Sorry, You Lose!")
           
     # Draw the scene
     screen.fill((213, 206, 163))
