@@ -93,8 +93,17 @@ def checkHint(player, Hints, maskP) :
                 QUESTION = Questions()
                 correction = QUESTION.display(player)
                 if correction == "Benar" : 
-                    if hint.index != 'E' : path.find(hint.index, 'E')
-                    else : print('Right')
+                    if hint.index != 'E' : 
+                        next = path.find(hint.index, 'E')
+                        if(next == 1) : hintview = HintView("img/left.png")
+                        elif(next == 2) : hintview = HintView("img/up.png")
+                        elif(next == 3) : hintview = HintView("img/right.png")
+                        elif(next == 4) : hintview = HintView("img/down.png")
+                        
+                        hintview.display()
+                    else :
+                        hintview = HintView("img/right.png")
+                        hintview.display()
                 else :
                     game_sound.stop_sound_effect("play")
                     final_page("img/lose.png", "Sorry, You Lose!")
@@ -220,6 +229,36 @@ class Questions:
 
             pygame.display.update()  
 
+class HintView:
+    def __init__(self, path):
+        self.screen = pygame.display.set_mode((1000, 800))
+        self.image = pygame.image.load(path)
+        self.font = pygame.font.Font(None, 36)
+
+    def display(self):
+        while True:
+            Q_MOUSE_POS = pygame.mouse.get_pos()
+            pygame.display.set_caption("Guess The Answer!")
+            
+            self.screen.blit(self.image, (200, 200))
+
+            Q_BACK = Button(image=pygame.image.load("img/x.png"), pos=(950, 50))
+            
+            for button in [Q_BACK]:
+                button.update(self.screen)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                    
+                if event.type == pygame.MOUSEBUTTONDOWN:  
+                    if Q_BACK.checkForInput(Q_MOUSE_POS):
+                        self.image = None
+                        return
+
+            pygame.display.update()
+            
 def display_timer(screen, elapsed_time):
     font = pygame.font.Font(None, 36)
     timer_text = font.render("Time: " + format_time(elapsed_time), True, (0, 0, 0))
@@ -391,26 +430,6 @@ while running:
         sign = checkWall(player, Walls, maskP)
         if sign == 1:
             player.move(0, -1.5)
-        
-        checkHint(player, Hints, maskP)
-            
-    if key[pygame.K_UP]:
-        sign = 0
-        player.move(0, -2)
-        
-        sign = checkWall(player, Walls, maskP)
-        if sign == 1:
-            player.move(0, 2)
-        
-        checkHint(player, Hints, maskP)
-            
-    if key[pygame.K_DOWN]:
-        sign = 0
-        player.move(0, 2)
-        
-        sign = checkWall(player, Walls, maskP)
-        if sign == 1:
-            player.move(0, -2)
         
         checkHint(player, Hints, maskP)
  

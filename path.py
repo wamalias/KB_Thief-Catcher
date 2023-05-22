@@ -52,10 +52,7 @@ class peta:
                 print('Rute A* Search: {}'.format(final_rute))
                 for (n, j, weight) in kotakab.cabang(start):
                     if j == final_rute[0] :
-                        if(n == 1) : print('LEFT')
-                        elif(n == 2) : print('TOP')
-                        elif(n == 3) : print('RIGHT')
-                        elif(n == 4) : print('DOWN')
+                        return n
                     
                 return final_rute
             
@@ -92,7 +89,8 @@ def append(x, y, index):
     
 def find(start, finish) :
     graph = peta(Mgraph)
-    graph.A_star(start, finish)
+    next = graph.A_star(start, finish)
+    return next
     
 pos = []    
 map = []
