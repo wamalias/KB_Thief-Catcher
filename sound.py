@@ -1,4 +1,5 @@
 import pygame
+import pygame.mixer
 
 class SoundEffectGame:
     def __init__(self):

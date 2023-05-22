@@ -1,18 +1,23 @@
-import pygame, sys
+import pygame
+import sys
 from button import Button
-from sound import SoundEffectGame
 import subprocess
+import pygame.mixer
 
 import os
 import random
 
 pygame.init()
+pygame.mixer.init()
 
 SCREEN = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Menu")
 
 BG = pygame.image.load("img/Background1.png")
-    
+
+backsound = pygame.mixer.Sound("sounds/home.wav")
+backsound.play()
+
 def run_game(level_code):
     subprocess.call(["python", level_code])
     
@@ -41,10 +46,13 @@ def play():
                 if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
                     main_menu()
                 if EASY_BUTTON.checkForInput(PLAY_MOUSE_POS):
+                    backsound.stop()
                     run_game("easy.py")    
                 if MEDIUM_BUTTON.checkForInput(PLAY_MOUSE_POS):
+                    backsound.stop()
                     run_game("medium.py")
                 if HARD_BUTTON.checkForInput(PLAY_MOUSE_POS):
+                    backsound.stop()
                     run_game("hard.py")
 
         pygame.display.update()
@@ -77,10 +85,6 @@ def main_menu():
         SCREEN.blit(BG, (0, 0))
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
-        
-        game_sound = SoundEffectGame()
-        game_sound.load_sound_effect("home", "sounds/home.wav")
-        game_sound.play_sound_effect("home")
 
         PLAY_BUTTON = Button(image=pygame.image.load("img/Play Rect.png"), pos=(250, 300))
         ABOUT_BUTTON = Button(image=pygame.image.load("img/About Rect.png"), pos=(250, 450))

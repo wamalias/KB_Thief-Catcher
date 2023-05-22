@@ -7,6 +7,8 @@ from button import Button
 from sound import SoundEffectGame
 import path
 import time
+import pygame.mixer
+
 # from main import *
 
 # Class for the orange dude
