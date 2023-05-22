@@ -152,30 +152,33 @@ class Questions:
                     pygame.quit()
                     sys.exit()
             
-                correct_paths_set_A = { "riddlesMedium/1.png", "riddlesMedium/3.png", "riddlesMedium/7.png", "riddlesMedium/12.png", "riddlesMedium/16.png", "riddlesMedium/21.png","riddlesMedium/22.png", "riddlesMedium/27.png", "riddlesMedium/28.png"}
-                correct_paths_set_B = { "riddlesMedium/4.png", "riddlesMedium/8.png", "riddlesMedium/10.png","riddlesMedium/11.png", "riddlesMedium/14.png", "riddlesMedium/15.png", "riddlesMedium/19.png", "riddlesMedium/20.png", "riddlesMedium/23.png", "riddlesMedium/25.png", "riddlesMedium/26.png", "riddlesMedium/29.png"}
+                correct_paths_set_A = { "riddlesMedium/1.png", "riddlesMedium/3.png", "riddlesMedium/7.png", "riddlesMedium/12.png", "riddlesMedium/16.png", "riddlesMedium/21.png","riddlesMedium/22.png", "riddlesMedium/27.png", "riddlesMedium/28.png", "riddlesMedium/8.png",}
+                correct_paths_set_B = { "riddlesMedium/4.png", "riddlesMedium/10.png","riddlesMedium/11.png", "riddlesMedium/14.png", "riddlesMedium/15.png", "riddlesMedium/19.png", "riddlesMedium/20.png", "riddlesMedium/23.png", "riddlesMedium/25.png", "riddlesMedium/26.png", "riddlesMedium/29.png"}
                 correct_paths_set_C = { "riddlesMedium/2.png", "riddlesMedium/5.png", "riddlesMedium/6.png", "riddlesMedium/9.png", "riddlesMedium/13.png", "riddlesMedium/17.png", "riddlesMedium/18.png", "riddlesMedium/24.png"}
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if A_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_A:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_A :
+                            if element[14] == self.displayed_image_path[14] and element[15] == self.displayed_image_path[15] :
+                                response = "Benar"
+
                         print(response)
                         
                     if B_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_B:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_B :
+                            if element[14] == self.displayed_image_path[14] and element[15] == self.displayed_image_path[15] :
+                                response = "Benar"
+
                         print(response)
                         
                     if C_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_C:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_C :
+                            if element[14] == self.displayed_image_path[14] and element[15] == self.displayed_image_path[15] :
+                                response = "Benar"
+
                         print(response)
 
                     if Q_BACK.checkForInput(Q_MOUSE_POS):

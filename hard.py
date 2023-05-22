@@ -159,24 +159,27 @@ class Questions:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if A_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_A:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_A :
+                            if element[12] == self.displayed_image_path[12] and element[13] == self.displayed_image_path[13] :
+                                response = "Benar"
+
                         print(response)
                         
                     if B_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_B:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_B :
+                            if element[12] == self.displayed_image_path[12] and element[13] == self.displayed_image_path[13] :
+                                response = "Benar"
+
                         print(response)
                         
                     if C_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_C:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_C :
+                            if element[12] == self.displayed_image_path[12] and element[13] == self.displayed_image_path[13] :
+                                response = "Benar"
+
                         print(response)
 
                     if Q_BACK.checkForInput(Q_MOUSE_POS):

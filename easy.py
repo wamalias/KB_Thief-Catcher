@@ -157,26 +157,29 @@ class Questions:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if A_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_A:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_A :
+                            if element[8] == self.displayed_image_path[8] and element[9] == self.displayed_image_path[9] :
+                                response = "Benar"
+
                         print(response)
                         
                     if B_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_B:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
+                        response = "salah"
+                        for element in correct_paths_set_B :
+                            if element[8] == self.displayed_image_path[8] and element[9] == self.displayed_image_path[9] :
+                                response = "Benar"
+
                         print(response)
                         
                     if C_ANS.checkForInput(Q_MOUSE_POS):
-                        if self.displayed_image_path in correct_paths_set_C:
-                            response = "Benar"
-                        else:
-                            response = "Salah"
-                        print(response)
+                        response = "salah"
+                        for element in correct_paths_set_C :
+                            if element[8] == self.displayed_image_path[8] and element[9] == self.displayed_image_path[9] :
+                                response = "Benar"
 
+                        print(response)
+                        
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return
