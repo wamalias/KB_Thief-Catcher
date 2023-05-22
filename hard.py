@@ -85,7 +85,6 @@ def checkWall(player, Walls, maskP) :
     return sign
 
 def checkHint(player, Hints, maskP) :
-    sign = 0
     for hint in Hints:
         maskH = pygame.mask.from_surface(hint.resized)
         offset = (hint.x - player.x, hint.y - player.y)
@@ -102,9 +101,6 @@ def checkHint(player, Hints, maskP) :
                 hint.question = 0
             hint.question = 0
             break
-
-    return sign
-
         
 def final_page(page, caption):
     pygame.display.set_caption(caption)
@@ -178,7 +174,6 @@ class Questions:
                             return response
                         else :
                             if player.life > 0 : 
-                                print(player.life)
                                 text = self.font.render("You have 1 life left", True, (255, 0, 0))
                                 text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
                                 self.screen.blit(text, text_rect)
@@ -196,7 +191,6 @@ class Questions:
                             return response
                         else :
                             if player.life > 0 : 
-                                print(player.life)
                                 text = self.font.render("You have 1 life left", True, (255, 0, 0))
                                 text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
                                 self.screen.blit(text, text_rect)
@@ -214,7 +208,6 @@ class Questions:
                             return response
                         else :
                             if player.life > 0 : 
-                                print(player.life)
                                 text = self.font.render("You have 1 life left", True, (255, 0, 0))
                                 text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
                                 self.screen.blit(text, text_rect)
@@ -363,59 +356,63 @@ while running:
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
         sign = 0
-        player.move(-1, 0)
+        player.move(-1.5, 0)
         
         sign = checkWall(player, Walls, maskP)
         if sign == 1:
-            player.move(1, 0)
+            player.move(1.5, 0)
         
-        sign = checkHint(player, Hints, maskP)
-        if sign == 2:
-            QUESTION = Questions()
-            QUESTION.display()
-            # print("Ini Hint")
+        checkHint(player, Hints, maskP)
 
     if key[pygame.K_RIGHT]:
         sign = 0
-        player.move(1, 0)
+        player.move(1.5, 0)
         
         sign = checkWall(player, Walls, maskP)
         if sign == 1:
-            player.move(-1, 0)
+            player.move(-1.5, 0)
         
-        sign = checkHint(player, Hints, maskP)
-        if sign == 2:
-            QUESTION = Questions()
-            QUESTION.display()
-            # print("Ini Hint")
+        checkHint(player, Hints, maskP)
             
     if key[pygame.K_UP]:
         sign = 0
-        player.move(0, -1)
+        player.move(0, -1.5)
         
         sign = checkWall(player, Walls, maskP)
         if sign == 1:
-            player.move(0, 1)
+            player.move(0, 1.5)
         
-        sign = checkHint(player, Hints, maskP)
-        if sign == 2:
-            QUESTION = Questions()
-            QUESTION.display()
-            # print("Ini Hint")
+        checkHint(player, Hints, maskP)
             
     if key[pygame.K_DOWN]:
         sign = 0
-        player.move(0, 1)
+        player.move(0, 1.5)
         
         sign = checkWall(player, Walls, maskP)
         if sign == 1:
-            player.move(0, -1)
+            player.move(0, -1.5)
         
-        sign = checkHint(player, Hints, maskP)
-        if sign == 2:
-            QUESTION = Questions()
-            QUESTION.display()
-            # print("Ini Hint")
+        checkHint(player, Hints, maskP)
+            
+    if key[pygame.K_UP]:
+        sign = 0
+        player.move(0, -2)
+        
+        sign = checkWall(player, Walls, maskP)
+        if sign == 1:
+            player.move(0, 2)
+        
+        checkHint(player, Hints, maskP)
+            
+    if key[pygame.K_DOWN]:
+        sign = 0
+        player.move(0, 2)
+        
+        sign = checkWall(player, Walls, maskP)
+        if sign == 1:
+            player.move(0, -2)
+        
+        checkHint(player, Hints, maskP)
  
     maskP = pygame.mask.from_surface(player.resized)
     maskE = pygame.mask.from_surface(enemy.resized)
