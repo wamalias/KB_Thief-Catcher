@@ -35,6 +35,7 @@ def play():
 
         SCREEN.blit(FILL, (0, 0))
         
+        # untuk inisialisasi objek tombol menggunakan kelas Button untuk tampilan menu game
         PLAY_BACK = Button(image=pygame.image.load("img/x.png"), pos=(950, 50))
         EASY_BUTTON = Button(image=pygame.image.load("img/Easy Rect.png"), pos=(500, 370))
         MEDIUM_BUTTON = Button(image=pygame.image.load("img/Medium Rect.png"), pos=(500, 520))
@@ -43,6 +44,7 @@ def play():
         for button in [PLAY_BACK, EASY_BUTTON, MEDIUM_BUTTON, HARD_BUTTON]:
             button.update(SCREEN)
         
+        # untuk menghandle beberapa menu dalam main menu
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -93,6 +95,7 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
+        # untuk inisialisasi objek tombol menggunakan kelas Button untuk tampilan main menu game
         PLAY_BUTTON = Button(image=pygame.image.load("img/Play Rect.png"), pos=(250, 300))
         ABOUT_BUTTON = Button(image=pygame.image.load("img/About Rect.png"), pos=(250, 450))
         EXIT_BUTTON = Button(image=pygame.image.load("img/Exit Rect.png"), pos=(250, 600)) 
