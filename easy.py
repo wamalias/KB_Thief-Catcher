@@ -417,7 +417,7 @@ while running:
         if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
             running = False
  
-    # untuk memeriksa tombol yang ditekan userd
+    # untuk memeriksa tombol yang ditekan user
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
         sign = 0
@@ -464,11 +464,9 @@ while running:
     
     offset = (enemy.x - player.x, enemy.y - player.y)
     if maskP.overlap(maskE, offset):
-        #print("Collision detected!")
+        
         game_sound.stop_sound_effect("play")
         final_page("img/win.png", "Congratulations! You Win!")
-        # pygame.quit()
-        # sys.exit()
     
     # menghitung waktu yang telah berlalu
     current_time = time.time()
