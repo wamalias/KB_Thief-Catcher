@@ -178,6 +178,9 @@ class Questions:
                         else :
                             if player.life > 0 : 
                                 print(player.life)
+                                text = self.font.render("You have 1 life left", True, (255, 0, 0))
+                                text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
+                                self.screen.blit(text, text_rect)
                                 player.life -= 1
                             else : return
                             
@@ -193,6 +196,9 @@ class Questions:
                         else :
                             if player.life > 0 : 
                                 print(player.life)
+                                text = self.font.render("You have 1 life left", True, (255, 0, 0))
+                                text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
+                                self.screen.blit(text, text_rect)
                                 player.life -= 1
                             else : return
                             
@@ -208,6 +214,9 @@ class Questions:
                         else :
                             if player.life > 0 : 
                                 print(player.life)
+                                text = self.font.render("You have 1 life left", True, (255, 0, 0))
+                                text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
+                                self.screen.blit(text, text_rect)
                                 player.life -= 1
                             else : return
                             
