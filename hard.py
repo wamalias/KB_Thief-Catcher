@@ -17,6 +17,7 @@ class Player(object):
         self.resized = pygame.transform.scale(self.image_surf, (55, 55))
         self.x = 10
         self.y = 643
+        self.life = 1
  
     def move(self, dx, dy):
         
@@ -91,7 +92,7 @@ def checkHint(player, Hints, maskP) :
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
                 QUESTION = Questions()
-                correction = QUESTION.display()
+                correction = QUESTION.display(player)
                 if correction == "Benar" : 
                     if hint.index != 'E' : path.find(hint.index, 'E')
                     else : print('Right')
@@ -137,7 +138,7 @@ class Questions:
         self.image_selector = ImageSelector("riddlesHard")
         self.displayed_image_path = None
 
-    def display(self):
+    def display(self, player):
         while True:
             Q_MOUSE_POS = pygame.mouse.get_pos()
             pygame.display.set_caption("Guess The Answer!")
@@ -176,9 +177,9 @@ class Questions:
                         if response == "Benar" :
                             return response
                         else :
-                            if self.life > 0 : 
-                                print(self.life)
-                                self.life -= 1
+                            if player.life > 0 : 
+                                print(player.life)
+                                player.life -= 1
                             else : return
                             
                     if B_ANS.checkForInput(Q_MOUSE_POS):
@@ -191,9 +192,9 @@ class Questions:
                         if response == "Benar" :
                             return response
                         else :
-                            if self.life > 0 : 
-                                print(self.life)
-                                self.life -= 1
+                            if player.life > 0 : 
+                                print(player.life)
+                                player.life -= 1
                             else : return
                             
                     if C_ANS.checkForInput(Q_MOUSE_POS):
@@ -206,9 +207,9 @@ class Questions:
                         if response == "Benar" :
                             return response
                         else :
-                            if self.life > 0 : 
-                                print(self.life)
-                                self.life -= 1
+                            if player.life > 0 : 
+                                print(player.life)
+                                player.life -= 1
                             else : return
                             
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
