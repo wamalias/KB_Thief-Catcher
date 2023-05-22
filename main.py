@@ -79,7 +79,7 @@ def main_menu():
         MENU_MOUSE_POS = pygame.mouse.get_pos()
         
         game_sound = SoundEffectGame()
-        game_sound.load_sound_effect("home", "sounds/home.mp3")
+        game_sound.load_sound_effect("home", "sounds/home.wav")
         game_sound.play_sound_effect("home")
 
         PLAY_BUTTON = Button(image=pygame.image.load("img/Play Rect.png"), pos=(250, 300))
