@@ -4,6 +4,7 @@ import sys
 import random
 import pygame
 from button import Button
+from sound import SoundEffectGame
 import path
 import time
 # from main import *
@@ -300,8 +301,12 @@ for row in level:
     
 path.roadMap()
 path.printG() 
+
+game_sound = SoundEffectGame()
+game_sound.load_sound_effect("play", "sounds/play.mp3")
+game_sound.play_sound_effect("play")
  
-MAX_PLAY_TIME = 30  # 3 minutes in seconds
+MAX_PLAY_TIME = 10 # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
@@ -379,6 +384,7 @@ while running:
     offset = (enemy.x - player.x, enemy.y - player.y)
     if maskP.overlap(maskE, offset):
         #print("Collision detected!")
+        game_sound.stop_sound_effect("play")
         final_page("img/win.png", "Congratulations! You Win!")
         # pygame.quit()
         # sys.exit()
@@ -389,6 +395,7 @@ while running:
 
     # Check if the maximum play time is reached
     if elapsed_time >= MAX_PLAY_TIME:
+        game_sound.stop_sound_effect("play")
         final_page("img/lose.png", "Sorry, You Lose!")
           
     # Draw the scene
