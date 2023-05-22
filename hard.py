@@ -90,8 +90,15 @@ def checkHint(player, Hints, maskP) :
         offset = (hint.x - player.x, hint.y - player.y)
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
-                sign = 2
-                path.find(hint.index, 'E')
+                QUESTION = Questions()
+                correction = QUESTION.display()
+                if correction == "Benar" : 
+                    if hint.index != 'E' : path.find(hint.index, 'E')
+                    else : print('Right')
+                else :
+                    game_sound.stop_sound_effect("play")
+                    final_page("img/lose.png", "Sorry, You Lose!")
+                hint.question = 0
             hint.question = 0
             break
 
@@ -127,7 +134,7 @@ class Questions:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((1000, 800))
-        self.image_selector = ImageSelector("riddlesMedium")
+        self.image_selector = ImageSelector("riddlesHard")
         self.displayed_image_path = None
 
     def display(self):
@@ -166,7 +173,14 @@ class Questions:
                                 response = "Benar"
 
                         print(response)
-                        
+                        if response == "Benar" :
+                            return response
+                        else :
+                            if self.life > 0 : 
+                                print(self.life)
+                                self.life -= 1
+                            else : return
+                            
                     if B_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
                         for element in correct_paths_set_B :
@@ -174,7 +188,14 @@ class Questions:
                                 response = "Benar"
 
                         print(response)
-                        
+                        if response == "Benar" :
+                            return response
+                        else :
+                            if self.life > 0 : 
+                                print(self.life)
+                                self.life -= 1
+                            else : return
+                            
                     if C_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
                         for element in correct_paths_set_C :
@@ -182,7 +203,14 @@ class Questions:
                                 response = "Benar"
 
                         print(response)
-
+                        if response == "Benar" :
+                            return response
+                        else :
+                            if self.life > 0 : 
+                                print(self.life)
+                                self.life -= 1
+                            else : return
+                            
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return

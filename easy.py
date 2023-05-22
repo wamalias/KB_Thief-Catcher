@@ -89,9 +89,15 @@ def checkHint(player, Hints, maskP) :
         offset = (hint.x - player.x, hint.y - player.y)
         if maskP.overlap(maskH, offset):
             if(hint.question == 1) : 
-                sign = 2
-                path.find(hint.index, 'C')
-            hint.question = 0
+                QUESTION = Questions()
+                correction = QUESTION.display()
+                if correction == "Benar" : 
+                    if hint.index != 'C' : path.find(hint.index, 'C')
+                    else : print('Right')
+                else :
+                    game_sound.stop_sound_effect("play")
+                    final_page("img/lose.png", "Sorry, You Lose!")
+                hint.question = 0
             break
 
     return sign
@@ -127,6 +133,7 @@ class Questions:
         self.screen = pygame.display.set_mode((1000, 800))
         self.image_selector = ImageSelector("riddles")
         self.displayed_image_path = None
+        self.life = 1
 
     def display(self):
         while True:
@@ -164,6 +171,13 @@ class Questions:
                                 response = "Benar"
 
                         print(response)
+                        if response == "Benar" :
+                            return response
+                        else :
+                            if self.life > 0 : 
+                                print(self.life)
+                                self.life -= 1
+                            else : return
                         
                     if B_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
@@ -172,6 +186,13 @@ class Questions:
                                 response = "Benar"
 
                         print(response)
+                        if response == "Benar" :
+                            return response
+                        else :
+                            if self.life > 0 : 
+                                print(self.life)
+                                self.life -= 1
+                            else : return 
                         
                     if C_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
@@ -180,6 +201,13 @@ class Questions:
                                 response = "Benar"
 
                         print(response)
+                        if response == "Benar" :
+                            return response
+                        else :
+                            if self.life > 0 : 
+                                print(self.life)
+                                self.life -= 1
+                            else : return
                         
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
@@ -304,8 +332,8 @@ path.printG()
 game_sound = SoundEffectGame()
 game_sound.load_sound_effect("play", "sounds/play.mp3")
 game_sound.play_sound_effect("play")
-
-MAX_PLAY_TIME = 10  # 3 minutes in seconds
+ 
+MAX_PLAY_TIME = 180  # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
@@ -344,10 +372,6 @@ while running:
             player.move(-1, 0)
         
         sign = checkHint(player, Hints, maskP)
-        if sign == 2:
-            QUESTION = Questions()
-            QUESTION.display()
-            # print("Ini Hint")
             
     if key[pygame.K_UP]:
         sign = 0
