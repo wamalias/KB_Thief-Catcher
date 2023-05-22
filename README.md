@@ -10,10 +10,14 @@
 
 ## Daftar Isi
 
+- [About](#About)
 - [Latar Belakang](#Latar-Belakang)
 - [Metode yang digunakan](#Metode-yang-digunakan)
 - [Cara Kerja](#Cara-Kerja)
 - [Flowchart](#Flowchart)
+
+## About
+Project ini disusun untuk memenuhi tugas Evaluasi Tengah Semester (ETS) Mata Kuliah Kecerdasan Buatan A
 
 ## Latar Belakang
 Alasan memilih topik ini adalah karena project ini menggunakan algoritma `A* Search` yang merupakan salah satu dari penerapan Informed Search, seperti yang telah dipelajari pada beberapa pertemuan sebelumnya. Maka dari itu kami mencoba untuk mengimplementasikannya kedalam game yang bernama Thief Catcher. Dimana dalam game ini nantinya akan dilakukan pencarian rute terpendek dari start ke goals dengan optimal.
