@@ -7,8 +7,6 @@ from button import Button
 from sound import SoundEffectGame
 import path
 import time
-import pygame.mixer
-
 # from main import *
 
 # Class for the orange dude
@@ -130,12 +128,17 @@ class ImageSelector:
             return os.path.join(self.folder_path, random.choice(image_files))
         return None
     
+import pygame
+import sys
+
+pygame.init()
+
 class Questions:
     def __init__(self):
-        pygame.init()
         self.screen = pygame.display.set_mode((1000, 800))
         self.image_selector = ImageSelector("riddles")
         self.displayed_image_path = None
+        self.font = pygame.font.Font(None, 36)
 
     def display(self, player):
         while True:
@@ -160,62 +163,76 @@ class Questions:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            
-                correct_paths_set_A = { "riddles/1.png", "riddles/5.png", "riddles/11.png", "riddles/12.png", "riddles/15.png", "riddles/17.png", "riddles/19.png"}
-                correct_paths_set_B = { "riddles/2.png", "riddles/4.png", "riddles/6.png", "riddles/8.png", "riddles/9.png", "riddles/10.png", "riddles/13.png", "riddles/18.png", "riddles/20.png"}
-                correct_paths_set_C = { "riddles/3.png", "riddles/7.png", "riddles/14.png", "riddles/16.png", "riddles/21.png"}
+
+                correct_paths_set_A = {"riddles/1.png", "riddles/5.png", "riddles/11.png", "riddles/12.png", "riddles/15.png", "riddles/17.png", "riddles/19.png"}
+                correct_paths_set_B = {"riddles/2.png", "riddles/4.png", "riddles/6.png", "riddles/8.png", "riddles/9.png", "riddles/10.png", "riddles/13.png", "riddles/18.png", "riddles/20.png"}
+                correct_paths_set_C = {"riddles/3.png", "riddles/7.png", "riddles/14.png", "riddles/16.png", "riddles/21.png"}
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if A_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
-                        for element in correct_paths_set_A :
-                            if element[8] == self.displayed_image_path[8] and element[9] == self.displayed_image_path[9] :
+                        for element in correct_paths_set_A:
+                            if element[8:10] == self.displayed_image_path[8:10]:
                                 response = "Benar"
 
                         print(response)
-                        if response == "Benar" :
+                        if response == "Benar":
                             return response
-                        else :
-                            if player.life > 0 : 
+                        else:
+                            if player.life > 0:
                                 print(player.life)
+                                text = self.font.render("You have 1 life left", True, (255, 0, 0))
+                                text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
+                                self.screen.blit(text, text_rect)
                                 player.life -= 1
-                            else : return
-                        
+
+                            else:
+                                return
+
                     if B_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
-                        for element in correct_paths_set_B :
-                            if element[8] == self.displayed_image_path[8] and element[9] == self.displayed_image_path[9] :
+                        for element in correct_paths_set_B:
+                            if element[8:10] == self.displayed_image_path[8:10]:
                                 response = "Benar"
 
                         print(response)
-                        if response == "Benar" :
+                        if response == "Benar":
                             return response
-                        else :
-                            if player.life > 0 : 
+                        else:
+                            if player.life > 0:
                                 print(player.life)
+                                text = self.font.render("You have 1 life left", True, (255, 0, 0))
+                                text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
+                                self.screen.blit(text, text_rect)
                                 player.life -= 1
-                            else : return 
-                        
+                            else:
+                                return
+
                     if C_ANS.checkForInput(Q_MOUSE_POS):
                         response = "salah"
-                        for element in correct_paths_set_C :
-                            if element[8] == self.displayed_image_path[8] and element[9] == self.displayed_image_path[9] :
+                        for element in correct_paths_set_C:
+                            if element[8:10] == self.displayed_image_path[8:10]:
                                 response = "Benar"
 
                         print(response)
-                        if response == "Benar" :
+                        if response == "Benar":
                             return response
-                        else :
-                            if player.life > 0 : 
+                        else:
+                            if player.life > 0:
                                 print(player.life)
+                                text = self.font.render("You have 1 life left", True, (255, 0, 0))
+                                text_rect = text.get_rect(center=(self.screen.get_width() // 2, 50))
+                                self.screen.blit(text, text_rect)
                                 player.life -= 1
-                            else : return
-                        
+                            else:
+                                return
+
                     if Q_BACK.checkForInput(Q_MOUSE_POS):
                         self.displayed_image_path = None
                         return
-                    
-            pygame.display.update()   
+
+            pygame.display.update()
+
            
 def display_timer(screen, elapsed_time):
     font = pygame.font.Font(None, 36)
