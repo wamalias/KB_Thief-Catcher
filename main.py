@@ -10,17 +10,22 @@ import random
 pygame.init()
 pygame.mixer.init()
 
+# untuk mengatur tampilan menu dalam game
 SCREEN = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Menu")
 
+# untuk mengatur background dalam game
 BG = pygame.image.load("img/Background1.png")
 
+# untuk memutar sound dalam game
 backsound = pygame.mixer.Sound("sounds/home.wav")
 backsound.play()
 
+# untuk menjalankan game dengan level tertentu
 def run_game(level_code):
     subprocess.call(["python", level_code])
     
+# untuk menampilkan menu play dalam game
 def play():
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -56,7 +61,8 @@ def play():
                     run_game("hard.py")
 
         pygame.display.update()
-          
+
+# untuk menampilkan menu about dalam game
 def about():
     while True:
         ABOUT_MOUSE_POS = pygame.mouse.get_pos()
@@ -80,6 +86,7 @@ def about():
 
         pygame.display.update()
 
+# fungsi utama yang menjalankan menu utama dalam game
 def main_menu():
     while True:
         SCREEN.blit(BG, (0, 0))
