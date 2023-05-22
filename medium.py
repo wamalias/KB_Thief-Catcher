@@ -17,7 +17,7 @@ class Player(object):
         self.resized = pygame.transform.scale(self.image_surf, (55, 55))
         self.x = 10
         self.y = 643
-        self.player = 1
+        self.life = 1
  
     def move(self, dx, dy):
         
@@ -335,7 +335,7 @@ game_sound = SoundEffectGame()
 game_sound.load_sound_effect("play", "sounds/play.mp3")
 game_sound.play_sound_effect("play")
  
-MAX_PLAY_TIME = 10 # 3 minutes in seconds
+MAX_PLAY_TIME = 180 # 3 minutes in seconds
 start_time = time.time()
 elapsed_time = 0
 
