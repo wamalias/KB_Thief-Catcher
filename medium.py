@@ -141,7 +141,7 @@ class Questions:
         self.screen = pygame.display.set_mode((1000, 800))
         self.image_selector = ImageSelector("riddlesMedium")
         self.displayed_image_path = None
-        self.life = 1
+        self.font = pygame.font.Font(None, 36)
 
     def display(self, player):
         while True:
