@@ -13,6 +13,7 @@
 - [Latar Belakang](#Latar-Belakang)
 - [Metode yang digunakan](#Metode-yang-digunakan)
 - [Cara Kerja](#Cara-Kerja)
+- [Flowchart](#Flowchart)
 
 ## Latar Belakang
 Alasan memilih topik ini adalah karena project ini menggunakan algoritma `A* Search` yang merupakan salah satu dari penerapan Informed Search, seperti yang telah dipelajari pada beberapa pertemuan sebelumnya. Maka dari itu kami mencoba untuk mengimplementasikannya kedalam game yang bernama Thief Catcher. Dimana dalam game ini nantinya akan dilakukan pencarian rute terpendek dari start ke goals dengan optimal.
@@ -22,3 +23,6 @@ Alasan memilih topik ini adalah karena project ini menggunakan algoritma `A* Sea
 
 ## Cara Kerja 
 Game ini dibuat untuk mencari jalan bagi detektif ke tempat dimana pencuri berada. Jadi player akan membantu detektif menemukan jalan yang benar dengan menelusuri jalur kotak-kotak yang ada pada layar.  Disni player juga dapat meminta hint untuk menemukan potongan jalur tercepat untuk dilalui. Jalur tercepat ditentukan dengan metode A*. Hint tersebut akan berisi sebuah teka-taki/riddle. Jika player dapat memecahkan teka-teki/riddle tersebut, maka player akan bisa mendapatkan hint. Jika player sudah menemukan jalur yang tepat, jalur yang dilalui user akan ditandai dengan warna hijau. Jika player sudah menemukan jalurnya sampai akhir dengan waktu di bawah 10 menit, maka player pun bisa menang.
+
+## Flowchart
+![Flowchart Alur Game](https://github.com/wamalias/KB_Thief-Catcher/assets/91377793/fe3fc9d2-66a8-4367-9c2c-934ea73a066e)
