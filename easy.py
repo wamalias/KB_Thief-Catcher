@@ -195,7 +195,6 @@ class Questions:
                             if element[8:10] == self.displayed_image_path[8:10]:
                                 response = "Benar"
 
-                        print(response)
                         if response == "Benar":
                             return response
                         else:
@@ -214,7 +213,6 @@ class Questions:
                             if element[8:10] == self.displayed_image_path[8:10]:
                                 response = "Benar"
 
-                        print(response)
                         if response == "Benar":
                             return response
                         else:
@@ -232,7 +230,6 @@ class Questions:
                             if element[8:10] == self.displayed_image_path[8:10]:
                                 response = "Benar"
 
-                        print(response)
                         if response == "Benar":
                             return response
                         else:

@@ -49,7 +49,7 @@ class peta:
                 #final_rute.append(start)
                 #Membalik urutan kota di final rute agar menjadi urutan yang baik
                 final_rute.reverse()
-                print('Rute A* Search: {}'.format(final_rute))
+                #print('Rute A* Search: {}'.format(final_rute))
                 for (n, j, weight) in kotakab.cabang(start):
                     if j == final_rute[0] :
                         return n
@@ -237,8 +237,10 @@ def roadMap() :
         Mgraph[element] = temp
      
 def printG() :
+    print("Graph untuk Menyatakan Actual Cost antar Node")
     for node, branch in Mgraph.items():
         print(node, branch)
-        
+    
+    print("Nilai Heuristik Setiap Node")    
     for node, weight in Heur.items():
         print(node, weight)

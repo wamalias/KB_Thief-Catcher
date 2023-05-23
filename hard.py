@@ -12,7 +12,7 @@ import time
 # Class Player berfungsi untuk merepresentasikan karakter pemain dalam game
 class Player(object):
     # berfungsi untuk menginisialisasi atribut objek `Player` saat objek dibuat
-   def __init__(self):
+    def __init__(self):
         self.image_surf = pygame.image.load("img/detective.png").convert_alpha() # menggambar karakter player
         self.resized = pygame.transform.scale(self.image_surf, (55, 55)) # mengatur ukuran gambar karakter player
         self.x = 10
@@ -183,8 +183,8 @@ class Questions:
             
                 # untuk menampilkan pertanyaan sesuai dengan letak jawaban benarnya
                 correct_paths_set_A = { "riddlesHard/1.png", "riddlesHard/2.png", "riddlesHard/9.png","riddlesHard/10.png", "riddlesHard/13.png", "riddlesHard/23.png", "riddlesHard/33.png"}
-                correct_paths_set_B = { "riddlesHard/3.png", "riddlesHard/4.png", "riddlesHard/7.png", "riddlesHard/8.png", "riddlesHard/16.png", "riddlesHard/17.png", "riddlesHard/20.png", "riddlesHard/22.png", "riddlesHard/26.png", "riddlesHard/27.png", "riddlesHard/30.png", "riddlesHard/32.png", "riddlesHard/36.png", "riddlesHard/37.png"}
-                correct_paths_set_C = { "riddlesHard/5.png", "riddlesHard/6.png", "riddlesHard/11.png", "riddlesHard/12.png", "riddlesHard/14.png", "riddlesHard/15.png", "riddlesHard/18.png", "riddlesHard/19.png", "riddlesHard/1.png", "riddlesHard/21.png", "riddlesHard/24.png", "riddlesHard/25.png", "riddlesHard/28.png", "riddlesHard/29.png", "riddlesHard/31.png", "riddlesHard/34.png", "riddlesHard/35.png"}
+                correct_paths_set_B = { "riddlesHard/3.png", "riddlesHard/4.png", "riddlesHard/7.png", "riddlesHard/15.png", "riddlesHard/16.png", "riddlesHard/17.png", "riddlesHard/20.png", "riddlesHard/22.png", "riddlesHard/26.png", "riddlesHard/27.png", "riddlesHard/30.png", "riddlesHard/32.png", "riddlesHard/36.png", "riddlesHard/37.png"}
+                correct_paths_set_C = { "riddlesHard/5.png", "riddlesHard/6.png", "riddlesHard/8.png", "riddlesHard/11.png", "riddlesHard/12.png", "riddlesHard/14.png", "riddlesHard/18.png", "riddlesHard/19.png", "riddlesHard/1.png", "riddlesHard/21.png", "riddlesHard/24.png", "riddlesHard/25.png", "riddlesHard/28.png", "riddlesHard/29.png", "riddlesHard/31.png", "riddlesHard/34.png", "riddlesHard/35.png"}
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # jawaban A
@@ -194,7 +194,6 @@ class Questions:
                             if element[12] == self.displayed_image_path[12] and element[13] == self.displayed_image_path[13] :
                                 response = "Benar"
 
-                        print(response)
                         if response == "Benar" :
                             return response
                         else :
@@ -212,7 +211,6 @@ class Questions:
                             if element[12] == self.displayed_image_path[12] and element[13] == self.displayed_image_path[13] :
                                 response = "Benar"
 
-                        print(response)
                         if response == "Benar" :
                             return response
                         else :
@@ -230,7 +228,6 @@ class Questions:
                             if element[12] == self.displayed_image_path[12] and element[13] == self.displayed_image_path[13] :
                                 response = "Benar"
 
-                        print(response)
                         if response == "Benar" :
                             return response
                         else :
